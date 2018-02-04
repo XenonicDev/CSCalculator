@@ -91,7 +91,8 @@ namespace CSCalculator.Core
 
             for (int Iter = TokenIndex; Iter > 0; --Iter)
             {
-                if ((int)Expression[Iter] >= 48 && (int)Expression[Iter] <= 57 && Iter != 0)
+                // Continue if it's a Number or a Period.
+                if (((int)Expression[Iter] >= 48 && (int)Expression[Iter] <= 57) || (int)Expression[Iter] != 46 && Iter != 0)
                 {
                     continue;
                 }
@@ -109,7 +110,8 @@ namespace CSCalculator.Core
 
             for (int Iter = 0; Iter < Expression.Length; ++Iter)
             {
-                if ((int)Expression[Iter] >= 48 && (int)Expression[Iter] <= 57 && Iter != Expression.Length)
+                // Continue if it's a Number or a Period.
+                if (((int)Expression[Iter] >= 48 && (int)Expression[Iter] <= 57) || (int)Expression[Iter] != 46 && Iter != Expression.Length)
                 {
                     continue;
                 }
@@ -118,6 +120,25 @@ namespace CSCalculator.Core
                 {
                     RHS = Convert.ToDecimal(Expression.Substring(RHSOffset + 1, Iter));
                 }
+            }
+        }
+
+        public static decimal SolveOperation(char Operation, decimal LHS, decimal RHS)
+        {
+            switch (Operation)
+            {
+                case '+':
+                    return LHS + RHS;
+                case '-':
+                    return LHS - RHS;
+                case '*':
+                    return LHS * RHS;
+                case '/':
+                    return LHS / RHS;
+                case '^':
+                    return (decimal)Math.Pow((double)LHS, (double)RHS);
+                default:
+                    throw new Exception("Unknown Operation");
             }
         }
 
@@ -142,7 +163,9 @@ namespace CSCalculator.Core
                 {
                     if (Expression[Iter] == '^')
                     {
+                        FindLHSAndRHS(Expression, Iter, out LHS, out RHS);
 
+                        SolveOperation(Expression[Iter], LHS, RHS);
                     }
                 }
 
