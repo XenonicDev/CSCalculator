@@ -119,6 +119,8 @@ namespace CSCalculator.Core
                 // Beginning of Expression or Found End of LHS.
                 LowerIndex = Iter;
                 LHS = Convert.ToDecimal(Expression.Substring(Iter, LHSOffset - Iter));
+
+                break;
             }
 
             if (Expression[TokenIndex + 1] == ' ')
