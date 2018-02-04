@@ -153,60 +153,55 @@ namespace CSCalculator.Core
             // Handle more sub expressions.
             Parse(Expression);
 
-            bool Exit = false;
+            int LowerIndex = 0;
+            int UpperIndex = 0;
+            decimal LHS = 0m;
+            decimal RHS = 0m;
 
-            while (!Exit)
+            // Search Exponents.
+            for (int Iter = 0; Iter < Expression.Length; ++Iter)
             {
-                int LowerIndex = 0;
-                int UpperIndex = 0;
-                decimal LHS = 0m;
-                decimal RHS = 0m;
-
-                // Search Exponents.
-                for (int Iter = 0; Iter < Expression.Length; ++Iter)
+                if (Expression[Iter] == '^')
                 {
-                    if (Expression[Iter] == '^')
-                    {
-                        FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
+                    FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
 
-                        StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, LowerIndex - 1));
+                    StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, LowerIndex - 1));
 
-                        ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
+                    ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
 
-                        ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length));
+                    ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length));
 
-                        Expression = ResultExpression.ToString();
-                    }
+                    Expression = ResultExpression.ToString();
                 }
+            }
 
-                // Search Multiplication/Division.
-                for (int Iter = 0; Iter < Expression.Length; ++Iter)
+            // Search Multiplication/Division.
+            for (int Iter = 0; Iter < Expression.Length; ++Iter)
+            {
+                if (Expression[Iter] == '*' || Expression[Iter] == '/')
                 {
-                    if (Expression[Iter] == '*' || Expression[Iter] == '/')
-                    {
-                        FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
+                    FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
 
-                        StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, LowerIndex - 1));
+                    StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, LowerIndex - 1));
 
-                        ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
+                    ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
 
-                        ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length));
-                    }
+                    ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length));
                 }
+            }
 
-                // Search Addition/Subtraction.
-                for (int Iter = 0; Iter < Expression.Length; ++Iter)
+            // Search Addition/Subtraction.
+            for (int Iter = 0; Iter < Expression.Length; ++Iter)
+            {
+                if (Expression[Iter] == '+' || Expression[Iter] == '-')
                 {
-                    if (Expression[Iter] == '+' || Expression[Iter] == '-')
-                    {
-                        FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
+                    FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
 
-                        StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, LowerIndex - 1));
+                    StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, LowerIndex - 1));
 
-                        ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
+                    ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
 
-                        ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length));
-                    }
+                    ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length));
                 }
             }
 
