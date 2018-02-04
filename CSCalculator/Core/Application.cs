@@ -23,7 +23,7 @@ namespace CSCalculator.Core
         }
 
         // Recursively Reduce and Solve an Expression
-        public static void Parse(string Expression)
+        public static void Parse(ref string Expression)
         {
             int StartIndex = -1, EndIndex = -1;
             int SubExpressionCounter = 0;
@@ -59,13 +59,16 @@ namespace CSCalculator.Core
                     string Substitue = Solve(Expression.Substring(StartIndex + 1, EndIndex - StartIndex - 1)).ToString();
 
                     // Begin Building the Reduced Expression.
-                    StringBuilder NewExpression = new StringBuilder(Expression.Substring(0, StartIndex - 1));
+                    StringBuilder NewExpression = new StringBuilder(Expression.Substring(0, StartIndex));
 
                     // Add the Substitution.
                     NewExpression.Append(Substitue);
 
                     // Add the Rest of the Expression.
-                    NewExpression.Append(Expression.Substring(EndIndex + 1, Expression.Length - EndIndex - 1));
+                    if (EndIndex != Expression.Length - 1)
+                    {
+                        NewExpression.Append(Expression.Substring(EndIndex + 1, Expression.Length - EndIndex - 1));
+                    }
 
                     Expression = NewExpression.ToString();
 
@@ -183,7 +186,7 @@ namespace CSCalculator.Core
         public static decimal Solve(string Expression)
         {
             // Handle more sub expressions.
-            Parse(Expression);
+            Parse(ref Expression);
 
             int LowerIndex = 0;
             int UpperIndex = 0;
