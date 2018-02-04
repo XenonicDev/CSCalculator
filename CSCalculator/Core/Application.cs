@@ -76,6 +76,51 @@ namespace CSCalculator.Core
             }
         }
 
+        public static void FindLHSAndRHS(string Expression, int TokenIndex, out decimal LHS, out decimal RHS)
+        {
+            LHS = 0;
+            RHS = 0;
+
+            int LHSOffset = TokenIndex;
+            int RHSOffset = TokenIndex;
+
+            if (Expression[TokenIndex - 1] == ' ')
+            {
+                --LHSOffset;
+            }
+
+            for (int Iter = TokenIndex; Iter > 0; --Iter)
+            {
+                if ((int)Expression[Iter] >= 48 && (int)Expression[Iter] <= 57 && Iter != 0)
+                {
+                    continue;
+                }
+
+                else
+                {
+                    LHS = Convert.ToDecimal(Expression.Substring(Iter, LHSOffset - 1));
+                }
+            }
+
+            if (Expression[TokenIndex + 1] == ' ')
+            {
+                ++RHSOffset;
+            }
+
+            for (int Iter = 0; Iter < Expression.Length; ++Iter)
+            {
+                if ((int)Expression[Iter] >= 48 && (int)Expression[Iter] <= 57 && Iter != Expression.Length)
+                {
+                    continue;
+                }
+
+                else
+                {
+                    RHS = Convert.ToDecimal(Expression.Substring(RHSOffset + 1, Iter));
+                }
+            }
+        }
+
         public static decimal Solve(string Expression)
         {
             decimal Result = 0m;
@@ -83,8 +128,26 @@ namespace CSCalculator.Core
             // Handle more sub expressions.
             Parse(Expression);
 
-            // Solve the Remaining Expression.
+            bool Exit = false;
 
+            while (!Exit)
+            {
+                StringBuilder ResultExpression = new StringBuilder();
+
+                decimal LHS = 0m;
+                decimal RHS = 0m;
+
+                // Search Exponents.
+                for (int Iter = 0; Iter < Expression.Length; ++Iter)
+                {
+                    if (Expression[Iter] == '^')
+                    {
+
+                    }
+                }
+
+                // Search Others.
+            }
 
             return Result;
         }
