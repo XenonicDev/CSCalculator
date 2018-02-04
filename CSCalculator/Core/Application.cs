@@ -169,7 +169,27 @@ namespace CSCalculator.Core
                     }
                 }
 
-                // Search Others.
+                // Search Multiplication/Division.
+                for (int Iter = 0; Iter < Expression.Length; ++Iter)
+                {
+                    if (Expression[Iter] == '*' || Expression[Iter] == '/')
+                    {
+                        FindLHSAndRHS(Expression, Iter, out LHS, out RHS);
+
+                        SolveOperation(Expression[Iter], LHS, RHS);
+                    }
+                }
+
+                // Search Addition/Subtraction.
+                for (int Iter = 0; Iter < Expression.Length; ++Iter)
+                {
+                    if (Expression[Iter] == '+' || Expression[Iter] == '-')
+                    {
+                        FindLHSAndRHS(Expression, Iter, out LHS, out RHS);
+
+                        SolveOperation(Expression[Iter], LHS, RHS);
+                    }
+                }
             }
 
             return Result;
