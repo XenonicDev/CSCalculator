@@ -155,8 +155,7 @@ namespace CSCalculator.Core
 
                 // End of Expression or Found End of RHS.
                 UpperIndex = Iter;
-                string Res = Expression.Substring(RHSOffset + 1, Iter - RHSOffset);
-                RHS = Convert.ToDecimal(Res);
+                RHS = Convert.ToDecimal(Expression.Substring(RHSOffset + 1, Iter - RHSOffset));
 
                 break;
             }
@@ -198,7 +197,7 @@ namespace CSCalculator.Core
                 {
                     FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
 
-                    StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, (LowerIndex > 0 ? LowerIndex - 1 : 0)));
+                    StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, LowerIndex));
 
                     ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
 
@@ -210,6 +209,9 @@ namespace CSCalculator.Core
 
                     // Replace Original Expression.
                     Expression = ResultExpression.ToString();
+
+                    // Reset Iterator, Research the Expression.
+                    Iter = 0;
                 }
             }
 
@@ -220,7 +222,7 @@ namespace CSCalculator.Core
                 {
                     FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
 
-                    StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, (LowerIndex > 0 ? LowerIndex - 1 : 0)));
+                    StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, LowerIndex));
 
                     ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
 
@@ -232,6 +234,9 @@ namespace CSCalculator.Core
 
                     // Replace Original Expression.
                     Expression = ResultExpression.ToString();
+
+                    // Reset Iterator, Research the Expression.
+                    Iter = 0;
                 }
             }
 
@@ -242,7 +247,7 @@ namespace CSCalculator.Core
                 {
                     FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
 
-                    StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, (LowerIndex > 0 ? LowerIndex - 1 : 0)));
+                    StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, LowerIndex));
 
                     ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
 
@@ -254,6 +259,9 @@ namespace CSCalculator.Core
 
                     // Replace Original Expression.
                     Expression = ResultExpression.ToString();
+
+                    // Reset Iterator, Research the Expression.
+                    Iter = 0;
                 }
             }
 
