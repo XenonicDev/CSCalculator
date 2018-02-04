@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CSCalculator.Core
 {
-    class Application
+    public class Application
     {
         // Make the Parser's Job Easier
         public static void RegulateExpression(string Expression)
@@ -78,8 +78,8 @@ namespace CSCalculator.Core
 
         public static void FindLHSAndRHS(string Expression, int TokenIndex, out int LowerIndex, out int UpperIndex, out decimal LHS, out decimal RHS)
         {
-            LowerIndex = 0;
-            UpperIndex = 0;
+            LowerIndex = 0;  // Lower Bounds of Substitution
+            UpperIndex = Expression.Length - 1;  // Upper Bounds of Substitution
             LHS = 0;
             RHS = 0;
 
@@ -91,19 +91,21 @@ namespace CSCalculator.Core
                 --LHSOffset;
             }
 
-            for (int Iter = TokenIndex; Iter > 0; --Iter)
+            for (int Iter = LHSOffset; Iter >= 0; --Iter)
             {
-                // Continue if it's a Number or a Period.
-                if (((int)Expression[Iter] >= 48 && (int)Expression[Iter] <= 57) || (int)Expression[Iter] != 46 && Iter != 0)
+                // Finish if it's the End of the Expression.
+                if (Iter > 0)
                 {
-                    continue;
+                    // Continue if it's a Number or a Period. 
+                    if (((int)Expression[Iter] >= 48 && (int)Expression[Iter] <= 57) || (int)Expression[Iter] != 46)
+                    {
+                        continue;
+                    }
                 }
 
-                else
-                {
-                    LowerIndex = Iter;
-                    LHS = Convert.ToDecimal(Expression.Substring(Iter, LHSOffset - 1));
-                }
+                // Beginning of Expression or Found End of LHS.
+                LowerIndex = Iter;
+                LHS = Convert.ToDecimal(Expression.Substring(Iter, LHSOffset));
             }
 
             if (Expression[TokenIndex + 1] == ' ')
@@ -111,19 +113,22 @@ namespace CSCalculator.Core
                 ++RHSOffset;
             }
 
-            for (int Iter = 0; Iter < Expression.Length; ++Iter)
+            for (int Iter = RHSOffset; Iter <= Expression.Length - 1; ++Iter)
             {
-                // Continue if it's a Number or a Period.
-                if (((int)Expression[Iter] >= 48 && (int)Expression[Iter] <= 57) || (int)Expression[Iter] != 46 && Iter != Expression.Length)
+                // Finish if it's the End of the Expression.
+                if (Iter < Expression.Length - 1)
                 {
-                    continue;
+                    // Continue if it's a Number or a Period.
+                    if (((int)Expression[Iter] >= 48 && (int)Expression[Iter] <= 57) || (int)Expression[Iter] != 46)
+                    {
+                        continue;
+                    }
                 }
 
-                else
-                {
-                    UpperIndex = Iter;
-                    RHS = Convert.ToDecimal(Expression.Substring(RHSOffset + 1, Iter));
-                }
+                // End of Expression or Found End of RHS.
+                UpperIndex = Iter;
+                string Res = Expression.Substring(RHSOffset, Expression.Length - Iter + 1);
+                RHS = Convert.ToDecimal(Res);
             }
         }
 
@@ -148,8 +153,6 @@ namespace CSCalculator.Core
 
         public static decimal Solve(string Expression)
         {
-            decimal Result = 0m;
-
             // Handle more sub expressions.
             Parse(Expression);
 
@@ -169,8 +172,13 @@ namespace CSCalculator.Core
 
                     ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
 
-                    ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length));
+                    // Only Add Rest of Expression if There's Something to Add.
+                    if (UpperIndex != Expression.Length - 1)
+                    {
+                        ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length));
+                    }
 
+                    // Replace Original Expression.
                     Expression = ResultExpression.ToString();
                 }
             }
@@ -186,7 +194,14 @@ namespace CSCalculator.Core
 
                     ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
 
-                    ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length));
+                    // Only Add Rest of Expression if There's Something to Add.
+                    if (UpperIndex != Expression.Length - 1)
+                    {
+                        ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length));
+                    }
+
+                    // Replace Original Expression.
+                    Expression = ResultExpression.ToString();
                 }
             }
 
@@ -197,20 +212,22 @@ namespace CSCalculator.Core
                 {
                     FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
 
-                    StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, LowerIndex - 1));
+                    StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, (LowerIndex > 0 ? LowerIndex - 1 : 0)));
 
                     ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
 
-                    ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length));
+                    // Only Add Rest of Expression if There's Something to Add.
+                    if (UpperIndex != Expression.Length - 1)
+                    {
+                        ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length));
+                    }
+
+                    // Replace Original Expression.
+                    Expression = ResultExpression.ToString();
                 }
             }
 
-            return Result;
-        }
-
-        public static int Main()
-        {
-            return 0;
+            return Convert.ToDecimal(Expression);
         }
     }
 }
