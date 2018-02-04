@@ -76,8 +76,10 @@ namespace CSCalculator.Core
             }
         }
 
-        public static void FindLHSAndRHS(string Expression, int TokenIndex, out decimal LHS, out decimal RHS)
+        public static void FindLHSAndRHS(string Expression, int TokenIndex, out int LowerIndex, out int UpperIndex, out decimal LHS, out decimal RHS)
         {
+            LowerIndex = 0;
+            UpperIndex = 0;
             LHS = 0;
             RHS = 0;
 
@@ -99,6 +101,7 @@ namespace CSCalculator.Core
 
                 else
                 {
+                    LowerIndex = Iter;
                     LHS = Convert.ToDecimal(Expression.Substring(Iter, LHSOffset - 1));
                 }
             }
@@ -118,6 +121,7 @@ namespace CSCalculator.Core
 
                 else
                 {
+                    UpperIndex = Iter;
                     RHS = Convert.ToDecimal(Expression.Substring(RHSOffset + 1, Iter));
                 }
             }
@@ -153,8 +157,8 @@ namespace CSCalculator.Core
 
             while (!Exit)
             {
-                StringBuilder ResultExpression = new StringBuilder();
-
+                int LowerIndex = 0;
+                int UpperIndex = 0;
                 decimal LHS = 0m;
                 decimal RHS = 0m;
 
@@ -163,9 +167,15 @@ namespace CSCalculator.Core
                 {
                     if (Expression[Iter] == '^')
                     {
-                        FindLHSAndRHS(Expression, Iter, out LHS, out RHS);
+                        FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
 
-                        SolveOperation(Expression[Iter], LHS, RHS);
+                        StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, LowerIndex - 1));
+
+                        ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
+
+                        ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length));
+
+                        Expression = ResultExpression.ToString();
                     }
                 }
 
@@ -174,9 +184,13 @@ namespace CSCalculator.Core
                 {
                     if (Expression[Iter] == '*' || Expression[Iter] == '/')
                     {
-                        FindLHSAndRHS(Expression, Iter, out LHS, out RHS);
+                        FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
 
-                        SolveOperation(Expression[Iter], LHS, RHS);
+                        StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, LowerIndex - 1));
+
+                        ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
+
+                        ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length));
                     }
                 }
 
@@ -185,9 +199,13 @@ namespace CSCalculator.Core
                 {
                     if (Expression[Iter] == '+' || Expression[Iter] == '-')
                     {
-                        FindLHSAndRHS(Expression, Iter, out LHS, out RHS);
+                        FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
 
-                        SolveOperation(Expression[Iter], LHS, RHS);
+                        StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, LowerIndex - 1));
+
+                        ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
+
+                        ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length));
                     }
                 }
             }
