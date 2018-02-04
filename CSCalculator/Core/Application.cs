@@ -91,21 +91,34 @@ namespace CSCalculator.Core
                 --LHSOffset;
             }
 
+            bool EnteredValueBlock = false;
+
             for (int Iter = LHSOffset; Iter >= 0; --Iter)
             {
                 // Finish if it's the End of the Expression.
                 if (Iter > 0)
                 {
-                    // Continue if it's a Number or a Period. 
-                    if (((int)Expression[Iter] >= 48 && (int)Expression[Iter] <= 57) || (int)Expression[Iter] != 46)
+                    // Inside the LHS, Track it and Continue.
+                    if (((int)Expression[Iter] >= 48 && (int)Expression[Iter] <= 57) || (int)Expression[Iter] == 46)
                     {
+                        EnteredValueBlock = true;
+
                         continue;
+                    }
+
+                    else
+                    {
+                        // If We Haven't Yet Started the RHS.
+                        if (!EnteredValueBlock)
+                        {
+                            continue;
+                        }
                     }
                 }
 
                 // Beginning of Expression or Found End of LHS.
                 LowerIndex = Iter;
-                LHS = Convert.ToDecimal(Expression.Substring(Iter, LHSOffset));
+                LHS = Convert.ToDecimal(Expression.Substring(Iter, LHSOffset - Iter));
             }
 
             if (Expression[TokenIndex + 1] == ' ')
@@ -113,22 +126,37 @@ namespace CSCalculator.Core
                 ++RHSOffset;
             }
 
+            EnteredValueBlock = false;
+
             for (int Iter = RHSOffset; Iter <= Expression.Length - 1; ++Iter)
             {
                 // Finish if it's the End of the Expression.
                 if (Iter < Expression.Length - 1)
                 {
-                    // Continue if it's a Number or a Period.
-                    if (((int)Expression[Iter] >= 48 && (int)Expression[Iter] <= 57) || (int)Expression[Iter] != 46)
+                    // Inside the RHS, Track it and Continue.
+                    if (((int)Expression[Iter] >= 48 && (int)Expression[Iter] <= 57) || (int)Expression[Iter] == 46)
                     {
+                        EnteredValueBlock = true;
+
                         continue;
+                    }
+
+                    else
+                    {
+                        // If We Haven't Yet Started the RHS.
+                        if (!EnteredValueBlock)
+                        {
+                            continue;
+                        }
                     }
                 }
 
                 // End of Expression or Found End of RHS.
                 UpperIndex = Iter;
-                string Res = Expression.Substring(RHSOffset, Expression.Length - Iter + 1);
+                string Res = Expression.Substring(RHSOffset + 1, Iter - RHSOffset);
                 RHS = Convert.ToDecimal(Res);
+
+                break;
             }
         }
 
