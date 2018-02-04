@@ -8,7 +8,7 @@ namespace CSCalculatorRuntime
     {
         public static void Main(string[] Args)
         {
-            string Expression = "4 + 5";
+            string Expression = "7 * 2";
 
             Console.WriteLine(Application.Solve(Expression));
 

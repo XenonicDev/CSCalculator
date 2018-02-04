@@ -168,7 +168,7 @@ namespace CSCalculator.Core
                 {
                     FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
 
-                    StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, LowerIndex - 1));
+                    StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, (LowerIndex > 0 ? LowerIndex - 1 : 0)));
 
                     ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
 
@@ -190,7 +190,7 @@ namespace CSCalculator.Core
                 {
                     FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
 
-                    StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, LowerIndex - 1));
+                    StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, (LowerIndex > 0 ? LowerIndex - 1 : 0)));
 
                     ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
 
