@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace CSCalculator.Core
 {
-    struct CExpression
+    public struct CExpression
     {
         public string Expr;
         public string Result;
@@ -16,7 +16,7 @@ namespace CSCalculator.Core
         }
     }
 
-    class Memory
+    public class Memory
     {
         // List of CExpressions
         public static ArrayList History;
