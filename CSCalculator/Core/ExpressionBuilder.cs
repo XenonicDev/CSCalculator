@@ -32,6 +32,21 @@ namespace CSCalculator.Core
         {
             ExpBuilder.Clear();
         }
+        
+        public void Format()
+        {
+            for (int Iter = 0; Iter < ExpBuilder.Length; ++Iter)
+            {
+                // Case: x(y) -> x*(y)
+                if (ExpBuilder[Iter] == '(')
+                {
+                    if (ExpBuilder[Iter] != 0 && ExpBuilder[Iter - 1] != ' ')
+                    {
+                        ExpBuilder = ExpBuilder.Insert(Iter - 1, "*");
+                    }
+                }
+            }
+        }
 
         public string GetExpression()
         {
