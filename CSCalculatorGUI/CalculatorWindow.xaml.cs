@@ -41,9 +41,11 @@ namespace CSCalculatorGUI
             ResultBox.Content = Builder.GetExpression();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Numpad_8_Click(object sender, RoutedEventArgs e)
         {
+            Builder.Add('8');
 
+            UpdateExpression();
         }
 
         private void Numpad_7_Click(object sender, RoutedEventArgs e)
