@@ -169,6 +169,8 @@ namespace CSCalculatorGUI
             ResultBox.Content = Result;
 
             MemoryHandler.Add(new CExpression(Builder.GetExpression(), Result));
+
+            Builder.Clear();
         }
 
         private void Command_Delete_Click(object sender, RoutedEventArgs e)
