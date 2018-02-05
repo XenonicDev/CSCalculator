@@ -22,14 +22,18 @@ namespace CSCalculatorGUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ExpressionBuilder Builder;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            Builder = new ExpressionBuilder();
         }
 
         private void UpdateExpression()
         {
-            ResultBox.Content = ExpressionBuilder.GetExpression();
+            ResultBox.Content = Builder.GetExpression();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -39,134 +43,134 @@ namespace CSCalculatorGUI
 
         private void Numpad_7_Click(object sender, RoutedEventArgs e)
         {
-            ExpressionBuilder.Add('7');
+            Builder.Add('7');
 
             UpdateExpression();
         }
 
         private void Numpad_9_Click(object sender, RoutedEventArgs e)
         {
-            ExpressionBuilder.Add('9');
+            Builder.Add('9');
 
             UpdateExpression();
         }
 
         private void Numpad_4_Click(object sender, RoutedEventArgs e)
         {
-            ExpressionBuilder.Add('4');
+            Builder.Add('4');
 
             UpdateExpression();
         }
 
         private void Numpad_5_Click(object sender, RoutedEventArgs e)
         {
-            ExpressionBuilder.Add('5');
+            Builder.Add('5');
 
             UpdateExpression();
         }
 
         private void Numpad_6_Click(object sender, RoutedEventArgs e)
         {
-            ExpressionBuilder.Add('6');
+            Builder.Add('6');
 
             UpdateExpression();
         }
 
         private void Numpad_1_Click(object sender, RoutedEventArgs e)
         {
-            ExpressionBuilder.Add('1');
+            Builder.Add('1');
 
             UpdateExpression();
         }
 
         private void Numpad_2_Click(object sender, RoutedEventArgs e)
         {
-            ExpressionBuilder.Add('2');
+            Builder.Add('2');
 
             UpdateExpression();
         }
 
         private void Numpad_3_Click(object sender, RoutedEventArgs e)
         {
-            ExpressionBuilder.Add('3');
+            Builder.Add('3');
 
             UpdateExpression();
         }
 
         private void Numpad_0_Click(object sender, RoutedEventArgs e)
         {
-            ExpressionBuilder.Add('0');
+            Builder.Add('0');
 
             UpdateExpression();
         }
 
         private void Numpad_Decimal_Click(object sender, RoutedEventArgs e)
         {
-            ExpressionBuilder.Add('.');
+            Builder.Add('.');
 
             UpdateExpression();
         }
 
         private void Numpad_Exponent_Click(object sender, RoutedEventArgs e)
         {
-            ExpressionBuilder.Add('^');
+            Builder.Add('^');
 
             UpdateExpression();
         }
 
         private void Operation_Negate_Click(object sender, RoutedEventArgs e)
         {
-            ExpressionBuilder.Add('-');
+            Builder.Add('-');
 
             UpdateExpression();
         }
 
         private void Command_AllClear_Click(object sender, RoutedEventArgs e)
         {
-            ExpressionBuilder.Clear();
+            Builder.Clear();
 
             UpdateExpression();
         }
 
         private void Operation_Divide_Click(object sender, RoutedEventArgs e)
         {
-            ExpressionBuilder.Add('/');
+            Builder.Add('/');
 
             UpdateExpression();
         }
 
         private void Operation_Subtract_Click(object sender, RoutedEventArgs e)
         {
-            ExpressionBuilder.Add('-');
+            Builder.Add('-');
 
             UpdateExpression();
         }
 
         private void Command_Execute_Click(object sender, RoutedEventArgs e)
         {
-            string Result = CSCalculator.Core.Application.Solve(ExpressionBuilder.GetExpression()).ToString();
+            string Result = CSCalculator.Core.Application.Solve(Builder.GetExpression()).ToString();
             ResultBox.Content = Result;
 
-            Memory.History.Add(new CExpression(ExpressionBuilder.GetExpression(), Result));
+            Memory.History.Add(new CExpression(Builder.GetExpression(), Result));
         }
 
         private void Command_Delete_Click(object sender, RoutedEventArgs e)
         {
-            ExpressionBuilder.RemoveLast();
+            Builder.RemoveLast();
 
             UpdateExpression();
         }
 
         private void Operation_Multiply_Click(object sender, RoutedEventArgs e)
         {
-            ExpressionBuilder.Add('*');
+            Builder.Add('*');
 
             UpdateExpression();
         }
 
         private void Operation_Add_Click(object sender, RoutedEventArgs e)
         {
-            ExpressionBuilder.Add('+');
+            Builder.Add('+');
 
             UpdateExpression();
         }

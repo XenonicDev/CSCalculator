@@ -6,29 +6,29 @@ namespace CSCalculator.Core
 {
     public class ExpressionBuilder
     {
-        private static StringBuilder ExpBuilder;
+        private StringBuilder ExpBuilder;
 
-        public static void Add(char Value)
+        public void Add(char Value)
         {
             ExpBuilder.Append(Value);
         }
 
-        public static void RemoveAt(int Index)
+        public void RemoveAt(int Index)
         {
             ExpBuilder.Remove(Index, 1);
         }
 
-        public static void RemoveLast()
+        public void RemoveLast()
         {
             ExpBuilder.Remove(ExpBuilder.Length - 1, 1);
         }
 
-        public static void Clear()
+        public void Clear()
         {
             ExpBuilder.Clear();
         }
 
-        public static string GetExpression()
+        public string GetExpression()
         {
             return ExpBuilder.ToString();
         }
