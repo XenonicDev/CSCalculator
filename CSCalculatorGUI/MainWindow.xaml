@@ -18,10 +18,11 @@
                 <RowDefinition Height="59"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="65"/>
-                <ColumnDefinition Width="65"/>
-                <ColumnDefinition Width="76"/>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="55"/>
+                <ColumnDefinition Width="61"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="Numpad_7" Content="7" Click="Numpad_7_Click" FontSize="18"/>
             <Button x:Name="Numpad_4" Content="4" Grid.Row="1" Click="Numpad_4_Click" FontSize="18"/>
@@ -35,6 +36,14 @@
             <Button x:Name="Numpad_6" Content="6" Grid.Column="2" Grid.Row="1" Click="Numpad_6_Click" FontSize="18"/>
             <Button x:Name="Numpad_3" Content="3" Grid.Column="2" Grid.Row="2" Click="Numpad_3_Click" FontSize="18"/>
             <Button x:Name="Numpad_Exponent" Content="EXP" Grid.Column="2" Grid.Row="3" Click="Numpad_Exponent_Click" FontSize="18"/>
+            <Button x:Name="Command_Delete" Content="DEL" Grid.Column="3" FontSize="18"/>
+            <Button x:Name="Operation_Multiply" Content="⋅" Grid.Column="3" Grid.Row="1" FontSize="18"/>
+            <Button x:Name="Operation_Add" Content="+" Grid.Column="3" Grid.Row="2" FontSize="18"/>
+            <Button x:Name="Operation_Negate" Content="(-)" Grid.Column="3" Grid.Row="3" FontSize="18" Click="Operation_Negate_Click"/>
+            <Button x:Name="Command_AllClear" Content="AC" Grid.Column="4" FontSize="18" Click="Command_AllClear_Click"/>
+            <Button x:Name="Operation_Divide" Content="÷" Grid.Column="4" Grid.Row="1" FontSize="18" Click="Operation_Divide_Click"/>
+            <Button x:Name="Operation_Subtract" Content="-" Grid.Column="4" Grid.Row="2" FontSize="18" Click="Operation_Subtract_Click"/>
+            <Button x:Name="Command_Execute" Content="EXE" Grid.Column="4" Grid.Row="3" FontSize="18" Click="Command_Execute_Click"/>
         </Grid>
     </Grid>
 </Window>

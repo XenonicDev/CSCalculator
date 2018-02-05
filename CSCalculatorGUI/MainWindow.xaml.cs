@@ -84,5 +84,30 @@ namespace CSCalculatorGUI
         {
 
         }
+
+        private void Operation_Negate_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Command_AllClear_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Operation_Divide_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Operation_Subtract_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Command_Execute_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
