@@ -48,9 +48,32 @@ namespace CSCalculator.Core
             }
         }
 
+        // Get the Expression in a Processable Format
         public string GetExpression()
         {
             return ExpBuilder.ToString();
+        }
+        
+        // Get the Expression in a Human Readable Format
+        public string GetReadableExpression()
+        {
+            StringBuilder Result = new StringBuilder();
+            
+            for (int Iter = 0; Iter < ExpBuilder.Length; ++Iter)
+            {
+                // Negate to '-'
+                if (ExpBuilder[Iter] == (char)Symbols.Negate)
+                {
+                    Result.Append('-');
+                }
+                
+                else
+                {
+                    Result.Append(ExpBuilder[Iter]);   
+                }
+            }
+            
+            return Result.ToString();
         }
     }
 }
