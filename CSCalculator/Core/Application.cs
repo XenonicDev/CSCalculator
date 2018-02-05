@@ -6,22 +6,6 @@ namespace CSCalculator.Core
 {
     public class Application
     {
-        // Make the Parser's Job Easier
-        public static void RegulateExpression(string Expression)
-        {
-            for (int Iter = 0; Iter < Expression.Length; ++Iter)
-            {
-                // Case: x(y) -> x*(y)
-                if (Expression[Iter] == '(')
-                {
-                    if (Expression[Iter] != 0 && Expression[Iter - 1] != ' ')
-                    {
-                        Expression = Expression.Insert(Iter - 1, "*");
-                    }
-                }
-            }
-        }
-
         // Recursively Reduce and Solve an Expression
         public static void Parse(ref string Expression)
         {
