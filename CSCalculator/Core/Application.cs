@@ -141,8 +141,8 @@ namespace CSCalculator.Core
                 }
 
                 // End of Expression or Found End of RHS.
-                UpperIndex = Iter;
-                RHS = Convert.ToDecimal(Expression.Substring(RHSOffset + 1, Iter - RHSOffset));
+                UpperIndex = (Iter == Expression.Length - 1 ? Iter : Iter - 1);
+                RHS = Convert.ToDecimal(Expression.Substring(RHSOffset + 1, UpperIndex - RHSOffset));
 
                 break;
             }
@@ -216,7 +216,7 @@ namespace CSCalculator.Core
                     // Only Add Rest of Expression if There's Something to Add.
                     if (UpperIndex != Expression.Length - 1)
                     {
-                        ResultExpression.Append(Expression.Substring(UpperIndex, Expression.Length - UpperIndex));
+                        ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length - UpperIndex - 1));
                     }
 
                     // Replace Original Expression.
