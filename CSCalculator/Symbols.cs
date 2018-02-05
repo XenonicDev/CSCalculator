@@ -1,8 +1,8 @@
 using System;
 
-namespace Symbols
+namespace CSCalculator
 {
-    public enum SymbolTable
+    public enum Symbols
     {
         Add = '+',
         Subtract = '-',
