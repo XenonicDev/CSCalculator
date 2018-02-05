@@ -39,7 +39,7 @@ namespace CSCalculatorGUI
 
         private void UpdateExpression()
         {
-            ResultBox.Content = Builder.GetExpression();
+            ResultBox.Content = Builder.GetReadableExpression();
         }
 
         private void Numpad_0_Click(object sender, RoutedEventArgs e)
