@@ -86,7 +86,7 @@ namespace CSCalculator.Core
                 if (Iter > 0)
                 {
                     // Inside the LHS, Track it and Continue.
-                    if (((int)Expression[Iter] >= 48 && (int)Expression[Iter] <= 57) || (int)Expression[Iter] == 46)
+                    if (((int)Expression[Iter] >= 48 && (int)Expression[Iter] <= 57) || (int)Expression[Iter] == 46 || (int)Expression[Iter] == (int)Symbols.Negate)
                     {
                         EnteredValueBlock = true;
 
@@ -105,7 +105,10 @@ namespace CSCalculator.Core
 
                 // Beginning of Expression or Found End of LHS.
                 LowerIndex = Iter;
-                LHS = Convert.ToDecimal(Expression.Substring(Iter, LHSOffset - Iter));
+
+                string LHSExpr = Expression.Substring(Iter, LHSOffset - Iter);
+
+                LHS = Convert.ToDecimal(LHSExpr.Replace('~', '-'));
 
                 break;
             }
