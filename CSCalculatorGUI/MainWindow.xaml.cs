@@ -24,5 +24,65 @@ namespace CSCalculatorGUI
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Numpad_7_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Numpad_9_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Numpad_4_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Numpad_5_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Numpad_6_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Numpad_1_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Numpad_2_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Numpad_3_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Numpad_0_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Numpad_Decimal_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Numpad_Exponent_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

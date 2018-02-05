@@ -10,5 +10,31 @@
         <Border x:Name="ResultBoxBorder" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="40" Margin="10,10,0,0" VerticalAlignment="Top" Width="266">
             <Label x:Name="ResultBox" Content="0" FontSize="20"/>
         </Border>
+        <Grid x:Name="ButtonGrid" HorizontalAlignment="Left" Height="254" Margin="10,55,0,0" VerticalAlignment="Top" Width="266">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65" />
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="59"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="65"/>
+                <ColumnDefinition Width="65"/>
+                <ColumnDefinition Width="76"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="Numpad_7" Content="7" Click="Numpad_7_Click" FontSize="18"/>
+            <Button x:Name="Numpad_4" Content="4" Grid.Row="1" Click="Numpad_4_Click" FontSize="18"/>
+            <Button x:Name="Numpad_1" Content="1" Grid.Row="2" Click="Numpad_1_Click" FontSize="18"/>
+            <Button x:Name="Numpad_0" Content="0" Grid.Row="3" Click="Numpad_0_Click" FontSize="18"/>
+            <Button x:Name="Numpad_8" Content="8" Grid.Column="1" Click="Button_Click" FontSize="18"/>
+            <Button x:Name="Numpad_5" Content="5" Grid.Column="1" Grid.Row="1" Click="Numpad_5_Click" FontSize="18"/>
+            <Button x:Name="Numpad_2" Content="2" Grid.Column="1" Grid.Row="2" Click="Numpad_2_Click" FontSize="18"/>
+            <Button x:Name="Numpad_Decimal" Content="." Grid.Column="1" Grid.Row="3" Click="Numpad_Decimal_Click" FontSize="18"/>
+            <Button x:Name="Numpad_9" Content="9" Grid.Column="2" Click="Numpad_9_Click" FontSize="18"/>
+            <Button x:Name="Numpad_6" Content="6" Grid.Column="2" Grid.Row="1" Click="Numpad_6_Click" FontSize="18"/>
+            <Button x:Name="Numpad_3" Content="3" Grid.Column="2" Grid.Row="2" Click="Numpad_3_Click" FontSize="18"/>
+            <Button x:Name="Numpad_Exponent" Content="EXP" Grid.Column="2" Grid.Row="3" Click="Numpad_Exponent_Click" FontSize="18"/>
+        </Grid>
     </Grid>
 </Window>
