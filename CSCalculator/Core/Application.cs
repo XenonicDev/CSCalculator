@@ -108,7 +108,7 @@ namespace CSCalculator.Core
 
                 string LHSExpr = Expression.Substring(Iter, LHSOffset - Iter);
 
-                LHS = Convert.ToDecimal(LHSExpr.Replace('~', '-'));
+                LHS = Convert.ToDecimal(LHSExpr.Replace((char)Symbols.Negate, '-'));
 
                 break;
             }
@@ -155,15 +155,15 @@ namespace CSCalculator.Core
         {
             switch (Operation)
             {
-                case '+':
+                case (char)Symbols.Add:
                     return LHS + RHS;
-                case '-':
+                case (char)Symbols.Subtract:
                     return LHS - RHS;
-                case '*':
+                case (char)Symbols.Multiply:
                     return LHS * RHS;
-                case '/':
+                case (char)Symbols.Divide:
                     return LHS / RHS;
-                case '^':
+                case (char)Symbols.Exponent:
                     return (decimal)Math.Pow((double)LHS, (double)RHS);
                 default:
                     throw new Exception("Unknown Operation");
@@ -183,7 +183,7 @@ namespace CSCalculator.Core
             // Search Exponents.
             for (int Iter = 0; Iter < Expression.Length; ++Iter)
             {
-                if (Expression[Iter] == '^')
+                if (Expression[Iter] == (char)Symbols.Exponent)
                 {
                     FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
 
@@ -208,7 +208,7 @@ namespace CSCalculator.Core
             // Search Multiplication/Division.
             for (int Iter = 0; Iter < Expression.Length; ++Iter)
             {
-                if (Expression[Iter] == '*' || Expression[Iter] == '/')
+                if (Expression[Iter] == (char)Symbols.Multiply || Expression[Iter] == (char)Symbols.Divide)
                 {
                     FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
 
@@ -233,7 +233,7 @@ namespace CSCalculator.Core
             // Search Addition/Subtraction.
             for (int Iter = 0; Iter < Expression.Length; ++Iter)
             {
-                if (Expression[Iter] == '+' || Expression[Iter] == '-')
+                if (Expression[Iter] == (char)Symbols.Add || Expression[Iter] == (char)Symbols.Subtract)
                 {
                     FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
 
