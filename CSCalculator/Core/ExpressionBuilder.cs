@@ -8,6 +8,11 @@ namespace CSCalculator.Core
     {
         private StringBuilder ExpBuilder;
 
+        public void Initialize()
+        {
+            ExpBuilder = new StringBuilder();
+        }
+
         public void Add(char Value)
         {
             ExpBuilder.Append(Value);

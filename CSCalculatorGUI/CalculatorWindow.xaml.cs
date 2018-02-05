@@ -29,6 +29,7 @@ namespace CSCalculatorGUI
             InitializeComponent();
 
             Builder = new ExpressionBuilder();
+            Builder.Initialize();
         }
 
         private void UpdateExpression()
