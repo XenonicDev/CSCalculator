@@ -41,44 +41,9 @@ namespace CSCalculatorGUI
             ResultBox.Content = Builder.GetExpression();
         }
 
-        private void Numpad_8_Click(object sender, RoutedEventArgs e)
+        private void Numpad_0_Click(object sender, RoutedEventArgs e)
         {
-            Builder.Add('8');
-
-            UpdateExpression();
-        }
-
-        private void Numpad_7_Click(object sender, RoutedEventArgs e)
-        {
-            Builder.Add('7');
-
-            UpdateExpression();
-        }
-
-        private void Numpad_9_Click(object sender, RoutedEventArgs e)
-        {
-            Builder.Add('9');
-
-            UpdateExpression();
-        }
-
-        private void Numpad_4_Click(object sender, RoutedEventArgs e)
-        {
-            Builder.Add('4');
-
-            UpdateExpression();
-        }
-
-        private void Numpad_5_Click(object sender, RoutedEventArgs e)
-        {
-            Builder.Add('5');
-
-            UpdateExpression();
-        }
-
-        private void Numpad_6_Click(object sender, RoutedEventArgs e)
-        {
-            Builder.Add('6');
+            Builder.Add('0');
 
             UpdateExpression();
         }
@@ -104,9 +69,44 @@ namespace CSCalculatorGUI
             UpdateExpression();
         }
 
-        private void Numpad_0_Click(object sender, RoutedEventArgs e)
+        private void Numpad_4_Click(object sender, RoutedEventArgs e)
         {
-            Builder.Add('0');
+            Builder.Add('4');
+
+            UpdateExpression();
+        }
+
+        private void Numpad_5_Click(object sender, RoutedEventArgs e)
+        {
+            Builder.Add('5');
+
+            UpdateExpression();
+        }
+
+        private void Numpad_6_Click(object sender, RoutedEventArgs e)
+        {
+            Builder.Add('6');
+
+            UpdateExpression();
+        }
+
+        private void Numpad_7_Click(object sender, RoutedEventArgs e)
+        {
+            Builder.Add('7');
+
+            UpdateExpression();
+        }
+
+        private void Numpad_8_Click(object sender, RoutedEventArgs e)
+        {
+            Builder.Add('8');
+
+            UpdateExpression();
+        }
+
+        private void Numpad_9_Click(object sender, RoutedEventArgs e)
+        {
+            Builder.Add('9');
 
             UpdateExpression();
         }
@@ -118,13 +118,6 @@ namespace CSCalculatorGUI
             UpdateExpression();
         }
 
-        private void Numpad_Exponent_Click(object sender, RoutedEventArgs e)
-        {
-            Builder.Add('^');
-
-            UpdateExpression();
-        }
-
         private void Operation_Negate_Click(object sender, RoutedEventArgs e)
         {
             Builder.Add('-');
@@ -132,9 +125,23 @@ namespace CSCalculatorGUI
             UpdateExpression();
         }
 
-        private void Command_AllClear_Click(object sender, RoutedEventArgs e)
+        private void Operation_Add_Click(object sender, RoutedEventArgs e)
         {
-            Builder.Clear();
+            Builder.Add('+');
+
+            UpdateExpression();
+        }
+
+        private void Operation_Subtract_Click(object sender, RoutedEventArgs e)
+        {
+            Builder.Add('-');
+
+            UpdateExpression();
+        }
+
+        private void Operation_Multiply_Click(object sender, RoutedEventArgs e)
+        {
+            Builder.Add('*');
 
             UpdateExpression();
         }
@@ -146,9 +153,9 @@ namespace CSCalculatorGUI
             UpdateExpression();
         }
 
-        private void Operation_Subtract_Click(object sender, RoutedEventArgs e)
+        private void Numpad_Exponent_Click(object sender, RoutedEventArgs e)
         {
-            Builder.Add('-');
+            Builder.Add('^');
 
             UpdateExpression();
         }
@@ -168,16 +175,9 @@ namespace CSCalculatorGUI
             UpdateExpression();
         }
 
-        private void Operation_Multiply_Click(object sender, RoutedEventArgs e)
+        private void Command_AllClear_Click(object sender, RoutedEventArgs e)
         {
-            Builder.Add('*');
-
-            UpdateExpression();
-        }
-
-        private void Operation_Add_Click(object sender, RoutedEventArgs e)
-        {
-            Builder.Add('+');
+            Builder.Clear();
 
             UpdateExpression();
         }
