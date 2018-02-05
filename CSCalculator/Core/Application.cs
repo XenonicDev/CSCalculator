@@ -63,7 +63,7 @@ namespace CSCalculator.Core
             }
         }
 
-        public static void FindLHSAndRHS(string Expression, int TokenIndex, out int LowerIndex, out int UpperIndex, out decimal LHS, out decimal RHS)
+        public static void FindLHSAndRHS(string Expression, int TokenIndex, out int LowerIndex, out int UpperIndex, out double LHS, out double RHS)
         {
             LowerIndex = 0;  // Lower Bounds of Substitution
             UpperIndex = Expression.Length - 1;  // Upper Bounds of Substitution
@@ -108,7 +108,7 @@ namespace CSCalculator.Core
 
                 string LHSExpr = Expression.Substring(Iter, LHSOffset - Iter);
 
-                LHS = Convert.ToDecimal(LHSExpr.Replace((char)Symbols.Negate, '-'));
+                LHS = Convert.ToDouble(LHSExpr.Replace((char)Symbols.Negate, '-'));
 
                 break;
             }
@@ -145,13 +145,13 @@ namespace CSCalculator.Core
 
                 // End of Expression or Found End of RHS.
                 UpperIndex = (Iter == Expression.Length - 1 ? Iter : Iter - 1);
-                RHS = Convert.ToDecimal(Expression.Substring(RHSOffset + 1, UpperIndex - RHSOffset));
+                RHS = Convert.ToDouble(Expression.Substring(RHSOffset + 1, UpperIndex - RHSOffset));
 
                 break;
             }
         }
 
-        public static decimal SolveOperation(char Operation, decimal LHS, decimal RHS)
+        public static double SolveOperation(char Operation, double LHS, double RHS)
         {
             switch (Operation)
             {
@@ -164,21 +164,21 @@ namespace CSCalculator.Core
                 case (char)Symbols.Divide:
                     return LHS / RHS;
                 case (char)Symbols.Exponent:
-                    return (decimal)Math.Pow((double)LHS, (double)RHS);
+                    return Math.Pow(LHS, RHS);
                 default:
                     throw new Exception("Unknown Operation");
             }
         }
 
-        public static decimal Solve(string Expression)
+        public static double Solve(string Expression)
         {
             // Handle more sub expressions.
             Parse(ref Expression);
 
             int LowerIndex = 0;
             int UpperIndex = 0;
-            decimal LHS = 0m;
-            decimal RHS = 0m;
+            double LHS = 0d;
+            double RHS = 0d;
 
             // Search Exponents.
             for (int Iter = 0; Iter < Expression.Length; ++Iter)
@@ -255,7 +255,7 @@ namespace CSCalculator.Core
                 }
             }
 
-            return Convert.ToDecimal(Expression);
+            return Convert.ToDouble(Expression);
         }
     }
 }
