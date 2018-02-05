@@ -23,6 +23,7 @@ namespace CSCalculatorGUI
     public partial class MainWindow : Window
     {
         private ExpressionBuilder Builder;
+        private Memory MemoryHandler;
 
         public MainWindow()
         {
@@ -30,6 +31,9 @@ namespace CSCalculatorGUI
 
             Builder = new ExpressionBuilder();
             Builder.Initialize();
+
+            MemoryHandler = new Memory();
+            MemoryHandler.Initialize();
         }
 
         private void UpdateExpression()
@@ -152,7 +156,7 @@ namespace CSCalculatorGUI
             string Result = CSCalculator.Core.Application.Solve(Builder.GetExpression()).ToString();
             ResultBox.Content = Result;
 
-            Memory.History.Add(new CExpression(Builder.GetExpression(), Result));
+            MemoryHandler.Add(new CExpression(Builder.GetExpression(), Result));
         }
 
         private void Command_Delete_Click(object sender, RoutedEventArgs e)

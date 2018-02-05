@@ -19,6 +19,21 @@ namespace CSCalculator.Core
     public class Memory
     {
         // List of CExpressions
-        public static ArrayList History;
+        private ArrayList History;
+
+        public void Initialize()
+        {
+            History = new ArrayList();
+        }
+
+        public void Add(CExpression Expr)
+        {
+            History.Add(Expr);
+        }
+
+        public void Clear()
+        {
+            History.Clear();
+        }
     }
 }
