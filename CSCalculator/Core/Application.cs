@@ -255,6 +255,9 @@ namespace CSCalculator.Core
                 }
             }
 
+            // Perform Last Minute Check for Negations. Catches Negations in Exponentials.
+            Expression = Expression.Replace((char)Symbols.Negate, '-');
+
             return Convert.ToDouble(Expression);
         }
     }
