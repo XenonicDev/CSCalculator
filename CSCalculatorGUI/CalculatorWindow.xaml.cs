@@ -162,6 +162,8 @@ namespace CSCalculatorGUI
 
         private void Command_Execute_Click(object sender, RoutedEventArgs e)
         {
+            Builder.Format();
+        
             string Result = CSCalculator.Core.Application.Solve(Builder.GetExpression()).ToString();
             ResultBox.Content = Result;
 
