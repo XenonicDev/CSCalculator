@@ -42,7 +42,7 @@ namespace CSCalculator.Core
                 {
                     if (ExpBuilder[Iter] != 0 && ExpBuilder[Iter - 1] != ' ')
                     {
-                        ExpBuilder = ExpBuilder.Insert(Iter - 1, "*");
+                        ExpBuilder = ExpBuilder.Insert(Iter - 1, (char)Symbols.Multiply);
                     }
                 }
             }
