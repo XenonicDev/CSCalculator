@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CSCalculatorGUI"
         mc:Ignorable="d"
-        Title="CS Calculator" Height="350" Width="559">
+        Title="CS Calculator" Height="350" Width="294">
     <Grid>
-        
+        <Border x:Name="ResultBoxBorder" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="40" Margin="10,10,0,0" VerticalAlignment="Top" Width="266">
+            <Label x:Name="ResultBox" Content="0" FontSize="20"/>
+        </Border>
     </Grid>
 </Window>
