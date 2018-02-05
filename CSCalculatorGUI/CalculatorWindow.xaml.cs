@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using CSCalculator;
 using CSCalculator.Core;
 
 namespace CSCalculatorGUI
@@ -120,42 +121,42 @@ namespace CSCalculatorGUI
 
         private void Operation_Negate_Click(object sender, RoutedEventArgs e)
         {
-            Builder.Add('-');
+            Builder.Add((char)Symbols.Negate);
 
             UpdateExpression();
         }
 
         private void Operation_Add_Click(object sender, RoutedEventArgs e)
         {
-            Builder.Add('+');
+            Builder.Add((char)Symbols.Add);
 
             UpdateExpression();
         }
 
         private void Operation_Subtract_Click(object sender, RoutedEventArgs e)
         {
-            Builder.Add('-');
+            Builder.Add((char)Symbols.Subtract);
 
             UpdateExpression();
         }
 
         private void Operation_Multiply_Click(object sender, RoutedEventArgs e)
         {
-            Builder.Add('*');
+            Builder.Add((char)Symbols.Multiply);
 
             UpdateExpression();
         }
 
         private void Operation_Divide_Click(object sender, RoutedEventArgs e)
         {
-            Builder.Add('/');
+            Builder.Add((char)Symbols.Divide);
 
             UpdateExpression();
         }
 
         private void Numpad_Exponent_Click(object sender, RoutedEventArgs e)
         {
-            Builder.Add('^');
+            Builder.Add((char)Symbols.Exponential);
 
             UpdateExpression();
         }
