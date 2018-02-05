@@ -8,7 +8,7 @@
         Title="CS Calculator" Height="350" Width="350" MinWidth="350" MinHeight="350">
     <Grid x:Name="BaseGrid">
         <Border x:Name="ResultBoxBorder" BorderBrush="Black" BorderThickness="1" Height="40" Margin="10,10,10,0" VerticalAlignment="Top">
-            <Label x:Name="ResultBox" Content="0" FontSize="20" HorizontalAlignment="Right"/>
+            <Label x:Name="ResultBox" Content="0" FontSize="25" HorizontalAlignment="Right" FontWeight="Bold"/>
         </Border>
         <Grid x:Name="ButtonGrid" Height="Auto" Margin="10,55,10,10" Width="Auto">
             <Grid.RowDefinitions>
