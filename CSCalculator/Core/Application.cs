@@ -86,7 +86,7 @@ namespace CSCalculator.Core
                 if (Iter > 0)
                 {
                     // Inside the LHS, Track it and Continue.
-                    if (((int)Expression[Iter] >= 48 && (int)Expression[Iter] <= 57) || (int)Expression[Iter] == 46 || (int)Expression[Iter] == (int)Symbols.Negate)
+                    if (((int)Expression[Iter] >= 48 && (int)Expression[Iter] <= 57) || (int)Expression[Iter] == 46 || (int)Expression[Iter] == (int)Symbols.Negate || (int)Expression[Iter] == (int)Symbols.Exponential)
                     {
                         EnteredValueBlock = true;
 
@@ -126,7 +126,7 @@ namespace CSCalculator.Core
                 if (Iter < Expression.Length - 1)
                 {
                     // Inside the RHS, Track it and Continue.
-                    if (((int)Expression[Iter] >= 48 && (int)Expression[Iter] <= 57) || (int)Expression[Iter] == 46)
+                    if (((int)Expression[Iter] >= 48 && (int)Expression[Iter] <= 57) || (int)Expression[Iter] == 46 || (int)Expression[Iter] == (int)Symbols.Exponential)
                     {
                         EnteredValueBlock = true;
 
@@ -237,7 +237,7 @@ namespace CSCalculator.Core
             // Search Addition/Subtraction.
             for (int Iter = 0; Iter < Expression.Length; ++Iter)
             {
-                if (Expression[Iter] == (char)Symbols.Add || (Expression[Iter] == (char)Symbols.Subtract && Expression[Iter - 1] != (char)Symbols.Subtract))
+                if (Expression[Iter] == (char)Symbols.Add || (Expression[Iter] == (char)Symbols.Subtract && Iter != 0))
                 {
                     FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
 
