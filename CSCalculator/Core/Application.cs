@@ -198,7 +198,7 @@ namespace CSCalculator.Core
                     // Only Add Rest of Expression if There's Something to Add.
                     if (UpperIndex != Expression.Length - 1)
                     {
-                        ResultExpression.Append(Expression.Substring(UpperIndex, Expression.Length - UpperIndex));
+                        ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length - UpperIndex - 1));
                     }
 
                     // Replace Original Expression.
@@ -248,7 +248,7 @@ namespace CSCalculator.Core
                     // Only Add Rest of Expression if There's Something to Add.
                     if (UpperIndex != Expression.Length - 1)
                     {
-                        ResultExpression.Append(Expression.Substring(UpperIndex, Expression.Length - UpperIndex));
+                        ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length - UpperIndex - 1));
                     }
 
                     // Replace Original Expression.
