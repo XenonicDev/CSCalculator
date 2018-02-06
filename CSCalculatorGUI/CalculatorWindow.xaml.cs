@@ -48,6 +48,10 @@ namespace CSCalculatorGUI
 
             MemoryHandler.Grab(0, ref ExprA);
 
+            StringBuilder ExprABuilder = new StringBuilder(ExprA.Expr);
+            ExprABuilder.Append(" = ");
+            ExprABuilder.Append(ExprA.Result);
+
             // If There's an Expression in A, then Load B with A.
             if ((string)HistoryBoxA.Content != "")
             {
@@ -55,10 +59,14 @@ namespace CSCalculatorGUI
 
                 MemoryHandler.Grab(1, ref ExprB);
 
-                HistoryBoxB.Content = ExprB.Expr;
+                StringBuilder ExprBBuilder = new StringBuilder(ExprB.Expr);
+                ExprBBuilder.Append(" = ");
+                ExprBBuilder.Append(ExprB.Result);
+
+                HistoryBoxB.Content = ExprBBuilder.ToString();
             }
 
-            HistoryBoxA.Content = ExprA.Expr;
+            HistoryBoxA.Content = ExprABuilder.ToString();
         }
 
         private void Numpad_0_Click(object sender, RoutedEventArgs e)
