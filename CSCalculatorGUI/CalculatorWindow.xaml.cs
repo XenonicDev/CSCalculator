@@ -48,9 +48,9 @@ namespace CSCalculatorGUI
 
             MemoryHandler.Grab(0, ref ExprA);
 
-            StringBuilder ExprABuilder = new StringBuilder(ExprA.Expr);
+            StringBuilder ExprABuilder = new StringBuilder(Builder.ToReadableExpression(ExprA.Expr));
             ExprABuilder.Append(" = ");
-            ExprABuilder.Append(ExprA.Result);
+            ExprABuilder.Append(Builder.ToReadableExpression(ExprA.Result));
 
             // If There's an Expression in A, then Load B with A.
             if ((string)HistoryBoxA.Content != "")
@@ -59,9 +59,9 @@ namespace CSCalculatorGUI
 
                 MemoryHandler.Grab(1, ref ExprB);
 
-                StringBuilder ExprBBuilder = new StringBuilder(ExprB.Expr);
+                StringBuilder ExprBBuilder = new StringBuilder(Builder.ToReadableExpression(ExprB.Expr));
                 ExprBBuilder.Append(" = ");
-                ExprBBuilder.Append(ExprB.Result);
+                ExprBBuilder.Append(Builder.ToReadableExpression(ExprB.Result));
 
                 HistoryBoxB.Content = ExprBBuilder.ToString();
             }

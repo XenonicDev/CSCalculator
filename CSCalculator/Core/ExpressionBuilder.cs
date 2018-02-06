@@ -53,27 +53,37 @@ namespace CSCalculator.Core
         {
             return ExpBuilder.ToString();
         }
-        
-        // Get the Expression in a Human Readable Format
-        public string GetReadableExpression()
+
+        public string ToReadableExpression(string Expression)
         {
             StringBuilder Result = new StringBuilder();
-            
-            for (int Iter = 0; Iter < ExpBuilder.Length; ++Iter)
+
+            for (int Iter = 0; Iter < Expression.Length; ++Iter)
             {
                 // Negate to '-'
-                if (ExpBuilder[Iter] == (char)Symbols.Negate)
+                if (Expression[Iter] == (char)Symbols.Negate)
                 {
                     Result.Append('-');
                 }
-                
+
+                else if (Expression[Iter] == (char)Symbols.Exponential)
+                {
+                    Result.Append('ᴇ');
+                }
+
                 else
                 {
-                    Result.Append(ExpBuilder[Iter]);   
+                    Result.Append(Expression[Iter]);
                 }
             }
-            
+
             return Result.ToString();
+        }
+
+        // Get the Expression in a Human Readable Format
+        public string GetReadableExpression()
+        {
+            return ToReadableExpression(ExpBuilder.ToString());
         }
     }
 }
