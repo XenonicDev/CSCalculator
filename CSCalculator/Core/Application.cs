@@ -145,7 +145,11 @@ namespace CSCalculator.Core
 
                 // End of Expression or Found End of RHS.
                 UpperIndex = (Iter == Expression.Length - 1 ? Iter : Iter - 1);
-                RHS = Convert.ToDouble(Expression.Substring(RHSOffset + 1, UpperIndex - RHSOffset));
+
+                string RHSExpr = Expression.Substring(RHSOffset + 1, UpperIndex - RHSOffset);
+
+                // Catch for Case: x-~y
+                RHS = Convert.ToDouble(RHSExpr.Replace((char)Symbols.Negate, '-'));
 
                 break;
             }
@@ -233,7 +237,7 @@ namespace CSCalculator.Core
             // Search Addition/Subtraction.
             for (int Iter = 0; Iter < Expression.Length; ++Iter)
             {
-                if (Expression[Iter] == (char)Symbols.Add || Expression[Iter] == (char)Symbols.Subtract)
+                if (Expression[Iter] == (char)Symbols.Add || (Expression[Iter] == (char)Symbols.Subtract && Expression[Iter - 1] != (char)Symbols.Subtract))
                 {
                     FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
 
