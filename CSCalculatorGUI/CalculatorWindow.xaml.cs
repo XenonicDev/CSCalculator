@@ -42,6 +42,25 @@ namespace CSCalculatorGUI
             ResultBox.Content = Builder.GetReadableExpression();
         }
 
+        private void UpdateHistory()
+        {
+            CExpression ExprA = new CExpression();
+
+            MemoryHandler.Grab(0, ref ExprA);
+
+            // If There's an Expression in A, then Load B with A.
+            if ((string)HistoryBoxA.Content != "")
+            {
+                CExpression ExprB = new CExpression();
+
+                MemoryHandler.Grab(1, ref ExprB);
+
+                HistoryBoxB.Content = ExprB.Expr;
+            }
+
+            HistoryBoxA.Content = ExprA.Expr;
+        }
+
         private void Numpad_0_Click(object sender, RoutedEventArgs e)
         {
             Builder.Add('0');
@@ -164,11 +183,13 @@ namespace CSCalculatorGUI
         private void Command_Execute_Click(object sender, RoutedEventArgs e)
         {
             Builder.Format();
-        
+
             string Result = CSCalculator.Core.Application.Solve(Builder.GetExpression()).ToString();
             ResultBox.Content = Result;
 
             MemoryHandler.Add(new CExpression(Builder.GetExpression(), Result));
+
+            UpdateHistory();
 
             Builder.Clear();
         }

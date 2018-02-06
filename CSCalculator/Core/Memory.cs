@@ -31,6 +31,11 @@ namespace CSCalculator.Core
             History.Add(Expr);
         }
 
+        public void Grab(int IndexFromNewest, ref CExpression Result)
+        {
+            Result = (CExpression)History[History.Count - IndexFromNewest - 1];
+        }
+
         public void Clear()
         {
             History.Clear();
