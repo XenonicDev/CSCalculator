@@ -104,9 +104,9 @@ namespace CSCalculator.Core
                 }
 
                 // Beginning of Expression or Found End of LHS.
-                LowerIndex = Iter;
+                LowerIndex = (Iter == 0 ? Iter : Iter + 1);
 
-                string LHSExpr = Expression.Substring(Iter, LHSOffset - Iter);
+                string LHSExpr = Expression.Substring(LowerIndex, LHSOffset - LowerIndex);
 
                 LHS = Convert.ToDouble(LHSExpr.Replace((char)Symbols.Negate, '-'));
 
