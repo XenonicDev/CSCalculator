@@ -117,6 +117,16 @@ namespace CSCalculator.Core
                 LHS = 0d;
             }
 
+            else if (Expression[LHSOffset] == (char)Symbols.Logarithm)
+            {
+                LHS = 0d;
+            }
+
+            else if (Expression[LHSOffset] == (char)Symbols.NaturalLogarithm)
+            {
+                LHS = 0d;
+            }
+
             else
             {
                 for (int Iter = LHSOffset; Iter >= 0; --Iter)
@@ -248,7 +258,7 @@ namespace CSCalculator.Core
                 double LHS = 0d;
                 double RHS = 0d;
 
-                // Search Trig Functions
+                // Search Special Functions
                 for (int Iter = 0; Iter < Expression.Length; ++Iter)
                 {
                     bool FoundFunc = false;
@@ -279,6 +289,16 @@ namespace CSCalculator.Core
                     }
 
                     else if (Expression[Iter] == (char)Symbols.Cotangent)
+                    {
+                        FoundFunc = true;
+                    }
+
+                    else if (Expression[Iter] == (char)Symbols.Logarithm)
+                    {
+                        FoundFunc = true;
+                    }
+
+                    else if (Expression[Iter] == (char)Symbols.NaturalLogarithm)
                     {
                         FoundFunc = true;
                     }
