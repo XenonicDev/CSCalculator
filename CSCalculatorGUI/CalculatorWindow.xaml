@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CSCalculatorGUI"
         mc:Ignorable="d"
-        Title="CS Calculator" Height="457" Width="350" MinWidth="350" MinHeight="412">
+        Title="CS Calculator" Height="607" Width="350" MinWidth="350" MinHeight="412">
     <Grid x:Name="BaseGrid">
         <Border x:Name="ResultBoxBorder" BorderBrush="Black" BorderThickness="1" Height="95" Margin="10,10,10,0" VerticalAlignment="Top">
             <Grid x:Name="IOGrid">
@@ -21,7 +21,9 @@
         </Border>
         <Grid x:Name="ButtonGrid" Height="Auto" Margin="10,110,10,10" Width="Auto">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -34,31 +36,41 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="Numpad_7" Content="7" Click="Numpad_7_Click" FontSize="25" Grid.Row="1"/>
-            <Button x:Name="Numpad_4" Content="4" Grid.Row="2" Click="Numpad_4_Click" FontSize="25"/>
-            <Button x:Name="Numpad_1" Content="1" Grid.Row="3" Click="Numpad_1_Click" FontSize="25"/>
-            <Button x:Name="Numpad_0" Content="0" Grid.Row="4" Click="Numpad_0_Click" FontSize="25"/>
-            <Button x:Name="Numpad_8" Content="8" Grid.Column="1" Click="Numpad_8_Click" FontSize="25" Grid.Row="1"/>
-            <Button x:Name="Numpad_5" Content="5" Grid.Column="1" Grid.Row="2" Click="Numpad_5_Click" FontSize="25"/>
-            <Button x:Name="Numpad_2" Content="2" Grid.Column="1" Grid.Row="3" Click="Numpad_2_Click" FontSize="25"/>
-            <Button x:Name="Numpad_Decimal" Content="." Grid.Column="1" Grid.Row="4" Click="Numpad_Decimal_Click" FontSize="35"/>
-            <Button x:Name="Numpad_9" Content="9" Grid.Column="2" Click="Numpad_9_Click" FontSize="25" Grid.Row="1"/>
-            <Button x:Name="Numpad_6" Content="6" Grid.Column="2" Grid.Row="2" Click="Numpad_6_Click" FontSize="25"/>
-            <Button x:Name="Numpad_3" Content="3" Grid.Column="2" Grid.Row="3" Click="Numpad_3_Click" FontSize="25"/>
-            <Button x:Name="Numpad_Exponential" Content="EXP" Grid.Column="2" Grid.Row="4" Click="Numpad_Exponential_Click" FontSize="20"/>
-            <Button x:Name="Command_Delete" Content="DEL" Grid.Column="3" FontSize="20" FontWeight="Bold" Click="Command_Delete_Click" Grid.Row="1"/>
-            <Button x:Name="Operation_Multiply" Content="×" Grid.Column="3" Grid.Row="2" FontSize="35" Click="Operation_Multiply_Click"/>
-            <Button x:Name="Operation_Add" Content="+" Grid.Column="3" Grid.Row="3" FontSize="35" Click="Operation_Add_Click"/>
-            <Button x:Name="Operation_Negate" Content="(–)" Grid.Column="3" Grid.Row="4" FontSize="25" Click="Operation_Negate_Click"/>
-            <Button x:Name="Command_AllClear" Content="AC" Grid.Column="4" FontSize="20" Click="Command_AllClear_Click" FontWeight="Bold" Grid.Row="1"/>
-            <Button x:Name="Operation_Divide" Content="÷" Grid.Column="4" Grid.Row="2" FontSize="35" Click="Operation_Divide_Click"/>
-            <Button x:Name="Operation_Subtract" Content="–" Grid.Column="4" Grid.Row="3" FontSize="35" Click="Operation_Subtract_Click"/>
-            <Button x:Name="Command_Execute" Content="EXE" Grid.Column="4" Grid.Row="4" FontSize="20" Click="Command_Execute_Click" FontWeight="Bold"/>
-            <Button x:Name="Numpad_Parenthese_Left" Content="(" FontSize="25" Click="Numpad_Parenthese_Left_Click"/>
-            <Button x:Name="Numpad_Parenthese_Right" Content=")" Grid.Column="1" FontSize="25" Click="Numpad_Parenthese_Right_Click"/>
-            <Button x:Name="Operation_Caret" Content="^" Grid.Column="2" FontSize="25" Click="Operation_Caret_Click"/>
-            <Button x:Name="Operation_Square" Content="X²" Grid.Column="3" FontSize="25" Click="Operation_Square_Click"/>
-            <Button x:Name="Operation_Cube" Content="X³" Grid.Column="4" FontSize="25" Click="Operation_Cube_Click"/>
+            <Button x:Name="Numpad_7" Content="7" Click="Numpad_7_Click" FontSize="25" Grid.Row="3"/>
+            <Button x:Name="Numpad_4" Content="4" Grid.Row="4" Click="Numpad_4_Click" FontSize="25"/>
+            <Button x:Name="Numpad_1" Content="1" Grid.Row="5" Click="Numpad_1_Click" FontSize="25"/>
+            <Button x:Name="Numpad_0" Content="0" Grid.Row="6" Click="Numpad_0_Click" FontSize="25"/>
+            <Button x:Name="Numpad_8" Content="8" Grid.Column="1" Click="Numpad_8_Click" FontSize="25" Grid.Row="3"/>
+            <Button x:Name="Numpad_5" Content="5" Grid.Column="1" Grid.Row="4" Click="Numpad_5_Click" FontSize="25"/>
+            <Button x:Name="Numpad_2" Content="2" Grid.Column="1" Grid.Row="5" Click="Numpad_2_Click" FontSize="25"/>
+            <Button x:Name="Numpad_Decimal" Content="." Grid.Column="1" Grid.Row="6" Click="Numpad_Decimal_Click" FontSize="35"/>
+            <Button x:Name="Numpad_9" Content="9" Grid.Column="2" Click="Numpad_9_Click" FontSize="25" Grid.Row="3"/>
+            <Button x:Name="Numpad_6" Content="6" Grid.Column="2" Grid.Row="4" Click="Numpad_6_Click" FontSize="25"/>
+            <Button x:Name="Numpad_3" Content="3" Grid.Column="2" Grid.Row="5" Click="Numpad_3_Click" FontSize="25"/>
+            <Button x:Name="Numpad_Exponential" Content="EXP" Grid.Column="2" Grid.Row="6" Click="Numpad_Exponential_Click" FontSize="20"/>
+            <Button x:Name="Command_Delete" Content="DEL" Grid.Column="3" FontSize="20" FontWeight="Bold" Click="Command_Delete_Click" Grid.Row="3"/>
+            <Button x:Name="Operation_Multiply" Content="×" Grid.Column="3" Grid.Row="4" FontSize="35" Click="Operation_Multiply_Click"/>
+            <Button x:Name="Operation_Add" Content="+" Grid.Column="3" Grid.Row="5" FontSize="35" Click="Operation_Add_Click"/>
+            <Button x:Name="Operation_Negate" Content="(–)" Grid.Column="3" Grid.Row="6" FontSize="25" Click="Operation_Negate_Click"/>
+            <Button x:Name="Command_AllClear" Content="AC" Grid.Column="4" FontSize="20" Click="Command_AllClear_Click" FontWeight="Bold" Grid.Row="3"/>
+            <Button x:Name="Operation_Divide" Content="÷" Grid.Column="4" Grid.Row="4" FontSize="35" Click="Operation_Divide_Click"/>
+            <Button x:Name="Operation_Subtract" Content="–" Grid.Column="4" Grid.Row="5" FontSize="35" Click="Operation_Subtract_Click"/>
+            <Button x:Name="Command_Execute" Content="EXE" Grid.Column="4" Grid.Row="6" FontSize="20" Click="Command_Execute_Click" FontWeight="Bold"/>
+            <Button x:Name="Numpad_Parenthese_Left" Content="(" FontSize="25" Click="Numpad_Parenthese_Left_Click" Grid.Row="2"/>
+            <Button x:Name="Numpad_Parenthese_Right" Content=")" Grid.Column="1" FontSize="25" Click="Numpad_Parenthese_Right_Click" Grid.Row="2"/>
+            <Button x:Name="Operation_Caret" Content="^" Grid.Column="2" FontSize="25" Click="Operation_Caret_Click" Grid.Row="2"/>
+            <Button x:Name="Operation_Square" Content="X²" Grid.Column="3" FontSize="25" Click="Operation_Square_Click" Grid.Row="2"/>
+            <Button x:Name="Operation_Cube" Content="X³" Grid.Column="4" FontSize="25" Click="Operation_Cube_Click" Grid.Row="2"/>
+            <Button x:Name="Operation_Squareroot" Content="√" Grid.Row="1" FontSize="25" Click="Operation_Squareroot_Click"/>
+            <Button x:Name="Operation_Root" Content="ˣ√" Grid.Column="1" Grid.Row="1" FontSize="25" Click="Operation_Root_Click"/>
+            <Button x:Name="Operation_Sine" Content="sin" Grid.Column="2" Grid.Row="1" FontSize="25" Click="Operation_Sine_Click"/>
+            <Button x:Name="Operation_Cosine" Content="cos" Grid.Column="3" Grid.Row="1" FontSize="25" Click="Operation_Cosine_Click"/>
+            <Button x:Name="Operation_Tangent" Content="tan" Grid.Column="4" Grid.Row="1" FontSize="25" Click="Operation_Tangent_Click"/>
+            <Button x:Name="Operation_Cotangent" Content="tan⁻¹" Grid.Column="4" FontSize="25" Click="Operation_Cotangent_Click"/>
+            <Button x:Name="Operation_Cosecant" Content="cos⁻¹" Grid.Column="3" RenderTransformOrigin="0.344,0.439" FontSize="25" Click="Operation_Cosecant_Click"/>
+            <Button x:Name="Secant" Content="sin⁻¹" Grid.Column="2" FontSize="25" Click="Operation_Secant_Click"/>
+            <Button x:Name="Operation_Logarithm" Content="log" FontSize="25" Click="Operation_Logarithm_Click"/>
+            <Button x:Name="Operation_NaturalLogarithm" Content="ln" Grid.Column="1" FontSize="25" Click="Operation_NaturalLogarithm_Click"/>
         </Grid>
     </Grid>
 </Window>

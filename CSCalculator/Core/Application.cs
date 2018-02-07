@@ -75,44 +75,82 @@ namespace CSCalculator.Core
             int LHSOffset = TokenIndex;
             int RHSOffset = TokenIndex;
 
-            if (Expression[TokenIndex - 1] == ' ')
+            bool EnteredValueBlock = false;
+
+            if (TokenIndex == 0)
+            {
+                LHS = 0d;
+            }
+
+            else if (Expression[TokenIndex - 1] == ' ')
             {
                 --LHSOffset;
             }
 
-            bool EnteredValueBlock = false;
-
-            for (int Iter = LHSOffset; Iter >= 0; --Iter)
+            if (Expression[LHSOffset] == (char)Symbols.Sine)
             {
-                // Finish if it's the End of the Expression.
-                if (Iter > 0)
+                LHS = 0d;
+            }
+
+            else if (Expression[LHSOffset] == (char)Symbols.Cosine)
+            {
+                LHS = 0d;
+            }
+
+            else if (Expression[LHSOffset] == (char)Symbols.Tangent)
+            {
+                LHS = 0d;
+            }
+
+            else if (Expression[LHSOffset] == (char)Symbols.Cosecant)
+            {
+                LHS = 0d;
+            }
+
+            else if (Expression[LHSOffset] == (char)Symbols.Secant)
+            {
+                LHS = 0d;
+            }
+
+            else if (Expression[LHSOffset] == (char)Symbols.Cotangent)
+            {
+                LHS = 0d;
+            }
+
+            else
+            {
+                for (int Iter = LHSOffset; Iter >= 0; --Iter)
                 {
-                    // Inside the LHS, Track it and Continue.
-                    if (((int)Expression[Iter] >= 48 && (int)Expression[Iter] <= 57) || (int)Expression[Iter] == 46 || (int)Expression[Iter] == (int)Symbols.Negate || (int)Expression[Iter] == (int)Symbols.Exponential)
+                    // Finish if it's the End of the Expression.
+                    if (Iter > 0)
                     {
-                        EnteredValueBlock = true;
-
-                        continue;
-                    }
-
-                    else
-                    {
-                        // If We Haven't Yet Started the RHS.
-                        if (!EnteredValueBlock)
+                        // Inside the LHS, Track it and Continue.
+                        if (((int)Expression[Iter] >= 48 && (int)Expression[Iter] <= 57) || (int)Expression[Iter] == 46 || (int)Expression[Iter] == (int)Symbols.Negate || (int)Expression[Iter] == (int)Symbols.Exponential)
                         {
+                            EnteredValueBlock = true;
+
                             continue;
                         }
+
+                        else
+                        {
+                            // If We Haven't Yet Started the RHS.
+                            if (!EnteredValueBlock)
+                            {
+                                continue;
+                            }
+                        }
                     }
+
+                    // Beginning of Expression or Found End of LHS.
+                    LowerIndex = (Iter == 0 ? Iter : Iter + 1);
+
+                    string LHSExpr = Expression.Substring(LowerIndex, LHSOffset - LowerIndex);
+
+                    LHS = Convert.ToDouble(LHSExpr.Replace((char)Symbols.Negate, '-'));
+
+                    break;
                 }
-
-                // Beginning of Expression or Found End of LHS.
-                LowerIndex = (Iter == 0 ? Iter : Iter + 1);
-
-                string LHSExpr = Expression.Substring(LowerIndex, LHSOffset - LowerIndex);
-
-                LHS = Convert.ToDouble(LHSExpr.Replace((char)Symbols.Negate, '-'));
-
-                break;
             }
 
             if (Expression[TokenIndex + 1] == ' ')
@@ -171,6 +209,24 @@ namespace CSCalculator.Core
                     return LHS / RHS;
                 case (char)Symbols.Caret:
                     return Math.Pow(LHS, RHS);
+                case (char)Symbols.Sine:
+                    return Math.Sin(RHS);
+                case (char)Symbols.Cosine:
+                    return Math.Cos(RHS);
+                case (char)Symbols.Tangent:
+                    return Math.Tan(RHS);
+                case (char)Symbols.Cosecant:
+                    return Math.Asin(RHS);
+                case (char)Symbols.Secant:
+                    return Math.Acos(RHS);
+                case (char)Symbols.Cotangent:
+                    return Math.Atan(RHS);
+                case (char)Symbols.Logarithm:
+                    return Math.Log10(RHS);
+                case (char)Symbols.NaturalLogarithm:
+                    return Math.Log(RHS);
+                case (char)Symbols.Root:
+                    return Math.Pow(LHS, 1d / RHS);
                 default:
                     throw new Exception("Unknown Operation");
             }
@@ -191,6 +247,63 @@ namespace CSCalculator.Core
                 int UpperIndex = 0;
                 double LHS = 0d;
                 double RHS = 0d;
+
+                // Search Trig Functions
+                for (int Iter = 0; Iter < Expression.Length; ++Iter)
+                {
+                    bool FoundFunc = false;
+
+                    if (Expression[Iter] == (char)Symbols.Sine)
+                    {
+                        FoundFunc = true;
+                    }
+
+                    else if (Expression[Iter] == (char)Symbols.Cosine)
+                    {
+                        FoundFunc = true;
+                    }
+
+                    else if (Expression[Iter] == (char)Symbols.Tangent)
+                    {
+                        FoundFunc = true;
+                    }
+
+                    else if (Expression[Iter] == (char)Symbols.Cosecant)
+                    {
+                        FoundFunc = true;
+                    }
+
+                    else if (Expression[Iter] == (char)Symbols.Secant)
+                    {
+                        FoundFunc = true;
+                    }
+
+                    else if (Expression[Iter] == (char)Symbols.Cotangent)
+                    {
+                        FoundFunc = true;
+                    }
+
+                    if (FoundFunc)
+                    {
+                        FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
+
+                        StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, LowerIndex));
+
+                        ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
+
+                        // Only Add Rest of Expression if There's Something to Add.
+                        if (UpperIndex != Expression.Length - 1)
+                        {
+                            ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length - UpperIndex - 1));
+                        }
+
+                        // Replace Original Expression.
+                        Expression = ResultExpression.ToString();
+
+                        // Reset Iterator, Research the Expression.
+                        Iter = 0;
+                    }
+                }
 
                 // Search Carets.
                 for (int Iter = 0; Iter < Expression.Length; ++Iter)

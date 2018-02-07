@@ -10,6 +10,15 @@ namespace CSCalculator
         Divide = '/',
         Negate = '~',
         Caret = '^',
-        Exponential = 'E'
+        Exponential = 'E',
+        Sine = '!',
+        Cosine = '@',
+        Tangent = '#',
+        Cosecant = '$',
+        Secant = '%',
+        Cotangent = '&',
+        Logarithm = ':',
+        NaturalLogarithm = ';',
+        Root = '['
     }
 }

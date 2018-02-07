@@ -268,5 +268,76 @@ namespace CSCalculatorGUI
 
             UpdateExpression();
         }
+
+        private void Operation_Logarithm_Click(object sender, RoutedEventArgs e)
+        {
+            Builder.Add((char)Symbols.Logarithm);
+
+            UpdateExpression();
+        }
+
+        private void Operation_NaturalLogarithm_Click(object sender, RoutedEventArgs e)
+        {
+            Builder.Add((char)Symbols.NaturalLogarithm);
+
+            UpdateExpression();
+        }
+
+        private void Operation_Secant_Click(object sender, RoutedEventArgs e)
+        {
+            Builder.Add((char)Symbols.Secant);
+
+            UpdateExpression();
+        }
+
+        private void Operation_Cosecant_Click(object sender, RoutedEventArgs e)
+        {
+            Builder.Add((char)Symbols.Cosecant);
+
+            UpdateExpression();
+        }
+
+        private void Operation_Cotangent_Click(object sender, RoutedEventArgs e)
+        {
+            Builder.Add((char)Symbols.Cotangent);
+
+            UpdateExpression();
+        }
+
+        private void Operation_Squareroot_Click(object sender, RoutedEventArgs e)
+        {
+            Builder.Add('2');
+            Builder.Add((char)Symbols.Root);
+
+            UpdateExpression();
+        }
+
+        private void Operation_Root_Click(object sender, RoutedEventArgs e)
+        {
+            Builder.Add((char)Symbols.Root);
+
+            UpdateExpression();
+        }
+
+        private void Operation_Sine_Click(object sender, RoutedEventArgs e)
+        {
+            Builder.Add((char)Symbols.Sine);
+
+            UpdateExpression();
+        }
+
+        private void Operation_Cosine_Click(object sender, RoutedEventArgs e)
+        {
+            Builder.Add((char)Symbols.Cosine);
+
+            UpdateExpression();
+        }
+
+        private void Operation_Tangent_Click(object sender, RoutedEventArgs e)
+        {
+            Builder.Add((char)Symbols.Tangent);
+
+            UpdateExpression();
+        }
     }
 }
