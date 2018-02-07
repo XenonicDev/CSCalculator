@@ -20,7 +20,7 @@ namespace CSCalculator.Core
 
         public void TryAddOffAnswer(char Value, Memory MemoryHandler)
         {
-            if (MemoryHandler.HasHistory())
+            if (MemoryHandler.HasHistory() && ExpBuilder.Length == 0)
             {
                 CExpression PrevExpression = new CExpression();
 
