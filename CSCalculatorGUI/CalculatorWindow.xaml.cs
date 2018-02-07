@@ -192,14 +192,19 @@ namespace CSCalculatorGUI
         {
             Builder.Format();
 
-            string Result = CSCalculator.Core.Application.Solve(Builder.GetExpression()).ToString();
-            ResultBox.Content = Result;
+            string Expression = Builder.GetExpression();
 
-            MemoryHandler.Add(new CExpression(Builder.GetExpression(), Result));
+            if (Expression != "")
+            {
+                string Result = CSCalculator.Core.Application.Solve(Expression).ToString();
+                ResultBox.Content = Result;
 
-            UpdateHistory();
+                MemoryHandler.Add(new CExpression(Builder.GetExpression(), Result));
 
-            Builder.Clear();
+                UpdateHistory();
+
+                Builder.Clear();
+            }
         }
 
         private void Command_Delete_Click(object sender, RoutedEventArgs e)
@@ -212,6 +217,43 @@ namespace CSCalculatorGUI
         private void Command_AllClear_Click(object sender, RoutedEventArgs e)
         {
             Builder.Clear();
+
+            UpdateExpression();
+        }
+
+        private void Numpad_Parenthese_Left_Click(object sender, RoutedEventArgs e)
+        {
+            Builder.Add('(');
+
+            UpdateExpression();
+        }
+
+        private void Numpad_Parenthese_Right_Click(object sender, RoutedEventArgs e)
+        {
+            Builder.Add(')');
+
+            UpdateExpression();
+        }
+
+        private void Operation_Caret_Click(object sender, RoutedEventArgs e)
+        {
+            Builder.Add((char)Symbols.Caret);
+
+            UpdateExpression();
+        }
+
+        private void Operation_Square_Click(object sender, RoutedEventArgs e)
+        {
+            Builder.Add((char)Symbols.Caret);
+            Builder.Add('2');
+
+            UpdateExpression();
+        }
+
+        private void Operation_Cube_Click(object sender, RoutedEventArgs e)
+        {
+            Builder.Add((char)Symbols.Caret);
+            Builder.Add('3');
 
             UpdateExpression();
         }

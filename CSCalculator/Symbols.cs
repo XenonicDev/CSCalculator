@@ -9,7 +9,7 @@ namespace CSCalculator
         Multiply = '*',
         Divide = '/',
         Negate = '~',
-        Exponent = '^',
+        Caret = '^',
         Exponential = 'E'
     }
 }

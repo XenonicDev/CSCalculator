@@ -167,7 +167,7 @@ namespace CSCalculator.Core
                     return LHS * RHS;
                 case (char)Symbols.Divide:
                     return LHS / RHS;
-                case (char)Symbols.Exponent:
+                case (char)Symbols.Caret:
                     return Math.Pow(LHS, RHS);
                 default:
                     throw new Exception("Unknown Operation");
@@ -184,10 +184,10 @@ namespace CSCalculator.Core
             double LHS = 0d;
             double RHS = 0d;
 
-            // Search Exponents.
+            // Search Carets.
             for (int Iter = 0; Iter < Expression.Length; ++Iter)
             {
-                if (Expression[Iter] == (char)Symbols.Exponent)
+                if (Expression[Iter] == (char)Symbols.Caret)
                 {
                     FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
 

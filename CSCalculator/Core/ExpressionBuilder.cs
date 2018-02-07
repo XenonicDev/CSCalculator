@@ -40,9 +40,11 @@ namespace CSCalculator.Core
                 // Case: x(y) -> x*(y)
                 if (ExpBuilder[Iter] == '(')
                 {
-                    if (ExpBuilder[Iter] != 0 && ExpBuilder[Iter - 1] != ' ')
+                    if (Iter != 0 && (ExpBuilder[Iter - 1] == ' ' || ((int)ExpBuilder[Iter - 1] >= 48 && (int)ExpBuilder[Iter - 1] <= 57)))
                     {
-                        ExpBuilder = ExpBuilder.Insert(Iter - 1, (char)Symbols.Multiply);
+                        ExpBuilder = ExpBuilder.Insert(Iter, (char)Symbols.Multiply);
+
+                        ++Iter;  // Double Increment to Avoid Rechecking.
                     }
                 }
             }
