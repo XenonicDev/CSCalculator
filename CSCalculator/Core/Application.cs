@@ -7,8 +7,10 @@ namespace CSCalculator.Core
     public class Application
     {
         // Recursively Reduce and Solve an Expression
-        public static void Parse(ref string Expression)
+        public static void Parse(ref string Expression, out string Error)
         {
+            Error = "";
+
             int StartIndex = -1, EndIndex = -1;
             int SubExpressionCounter = 0;
 
@@ -40,7 +42,7 @@ namespace CSCalculator.Core
                     EndIndex = Iter;
 
                     // Solve this expression and reduce.
-                    string Substitue = Solve(Expression.Substring(StartIndex + 1, EndIndex - StartIndex - 1)).ToString();
+                    string Substitue = Solve(Expression.Substring(StartIndex + 1, EndIndex - StartIndex - 1), out Error).ToString();
 
                     // Begin Building the Reduced Expression.
                     StringBuilder NewExpression = new StringBuilder(Expression.Substring(0, StartIndex));
@@ -174,95 +176,111 @@ namespace CSCalculator.Core
             }
         }
 
-        public static double Solve(string Expression)
+        public static double Solve(string Expression, out string Error)
         {
-            // Handle more sub expressions.
-            Parse(ref Expression);
+            Error = "";
 
-            int LowerIndex = 0;
-            int UpperIndex = 0;
-            double LHS = 0d;
-            double RHS = 0d;
+            double Result;
 
-            // Search Carets.
-            for (int Iter = 0; Iter < Expression.Length; ++Iter)
+            try
             {
-                if (Expression[Iter] == (char)Symbols.Caret)
+                // Handle more sub expressions.
+                Parse(ref Expression, out Error);
+
+                int LowerIndex = 0;
+                int UpperIndex = 0;
+                double LHS = 0d;
+                double RHS = 0d;
+
+                // Search Carets.
+                for (int Iter = 0; Iter < Expression.Length; ++Iter)
                 {
-                    FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
-
-                    StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, LowerIndex));
-
-                    ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
-
-                    // Only Add Rest of Expression if There's Something to Add.
-                    if (UpperIndex != Expression.Length - 1)
+                    if (Expression[Iter] == (char)Symbols.Caret)
                     {
-                        ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length - UpperIndex - 1));
+                        FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
+
+                        StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, LowerIndex));
+
+                        ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
+
+                        // Only Add Rest of Expression if There's Something to Add.
+                        if (UpperIndex != Expression.Length - 1)
+                        {
+                            ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length - UpperIndex - 1));
+                        }
+
+                        // Replace Original Expression.
+                        Expression = ResultExpression.ToString();
+
+                        // Reset Iterator, Research the Expression.
+                        Iter = 0;
                     }
-
-                    // Replace Original Expression.
-                    Expression = ResultExpression.ToString();
-
-                    // Reset Iterator, Research the Expression.
-                    Iter = 0;
                 }
+
+                // Search Multiplication/Division.
+                for (int Iter = 0; Iter < Expression.Length; ++Iter)
+                {
+                    if (Expression[Iter] == (char)Symbols.Multiply || Expression[Iter] == (char)Symbols.Divide)
+                    {
+                        FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
+
+                        StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, LowerIndex));
+
+                        ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
+
+                        // Only Add Rest of Expression if There's Something to Add.
+                        if (UpperIndex != Expression.Length - 1)
+                        {
+                            ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length - UpperIndex - 1));
+                        }
+
+                        // Replace Original Expression.
+                        Expression = ResultExpression.ToString();
+
+                        // Reset Iterator, Research the Expression.
+                        Iter = 0;
+                    }
+                }
+
+                // Search Addition/Subtraction.
+                for (int Iter = 0; Iter < Expression.Length; ++Iter)
+                {
+                    if (Expression[Iter] == (char)Symbols.Add || (Expression[Iter] == (char)Symbols.Subtract && Iter != 0))
+                    {
+                        FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
+
+                        StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, LowerIndex));
+
+                        ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
+
+                        // Only Add Rest of Expression if There's Something to Add.
+                        if (UpperIndex != Expression.Length - 1)
+                        {
+                            ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length - UpperIndex - 1));
+                        }
+
+                        // Replace Original Expression.
+                        Expression = ResultExpression.ToString();
+
+                        // Reset Iterator, Research the Expression.
+                        Iter = 0;
+                    }
+                }
+
+                // Perform Last Minute Check for Negations. Catches Negations in Exponentials.
+                Expression = Expression.Replace((char)Symbols.Negate, '-');
+
+                Result = Convert.ToDouble(Expression);
             }
 
-            // Search Multiplication/Division.
-            for (int Iter = 0; Iter < Expression.Length; ++Iter)
+            catch (Exception e)
             {
-                if (Expression[Iter] == (char)Symbols.Multiply || Expression[Iter] == (char)Symbols.Divide)
-                {
-                    FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
+                Error = "Arithmetic Error";
 
-                    StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, LowerIndex));
-
-                    ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
-
-                    // Only Add Rest of Expression if There's Something to Add.
-                    if (UpperIndex != Expression.Length - 1)
-                    {
-                        ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length - UpperIndex - 1));
-                    }
-
-                    // Replace Original Expression.
-                    Expression = ResultExpression.ToString();
-
-                    // Reset Iterator, Research the Expression.
-                    Iter = 0;
-                }
+                return 0d;
             }
 
-            // Search Addition/Subtraction.
-            for (int Iter = 0; Iter < Expression.Length; ++Iter)
-            {
-                if (Expression[Iter] == (char)Symbols.Add || (Expression[Iter] == (char)Symbols.Subtract && Iter != 0))
-                {
-                    FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
-
-                    StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, LowerIndex));
-
-                    ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
-
-                    // Only Add Rest of Expression if There's Something to Add.
-                    if (UpperIndex != Expression.Length - 1)
-                    {
-                        ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length - UpperIndex - 1));
-                    }
-
-                    // Replace Original Expression.
-                    Expression = ResultExpression.ToString();
-
-                    // Reset Iterator, Research the Expression.
-                    Iter = 0;
-                }
-            }
-
-            // Perform Last Minute Check for Negations. Catches Negations in Exponentials.
-            Expression = Expression.Replace((char)Symbols.Negate, '-');
-
-            return Convert.ToDouble(Expression);
+            return Result;
         }
     }
 }

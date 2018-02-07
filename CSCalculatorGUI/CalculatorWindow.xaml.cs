@@ -196,12 +196,23 @@ namespace CSCalculatorGUI
 
             if (Expression != "")
             {
-                string Result = CSCalculator.Core.Application.Solve(Expression).ToString();
-                ResultBox.Content = Result;
+                string Error;
 
-                MemoryHandler.Add(new CExpression(Builder.GetExpression(), Result));
+                string Result = CSCalculator.Core.Application.Solve(Expression, out Error).ToString();
 
-                UpdateHistory();
+                if (Error != "")
+                {
+                    ResultBox.Content = Error;
+                }
+
+                else
+                {
+                    ResultBox.Content = Result;
+
+                    MemoryHandler.Add(new CExpression(Builder.GetExpression(), Result));
+
+                    UpdateHistory();
+                }
 
                 Builder.Clear();
             }
