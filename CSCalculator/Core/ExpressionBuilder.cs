@@ -87,6 +87,51 @@ namespace CSCalculator.Core
                     Result.Append('ᴇ');
                 }
 
+                else if (Expression[Iter] == (char)Symbols.Sine)
+                {
+                    Result.Append("sin");
+                }
+
+                else if (Expression[Iter] == (char)Symbols.Cosine)
+                {
+                    Result.Append("cos");
+                }
+
+                else if (Expression[Iter] == (char)Symbols.Tangent)
+                {
+                    Result.Append("tan");
+                }
+
+                else if (Expression[Iter] == (char)Symbols.Cosecant)
+                {
+                    Result.Append("csc");
+                }
+
+                else if (Expression[Iter] == (char)Symbols.Secant)
+                {
+                    Result.Append("sec");
+                }
+
+                else if (Expression[Iter] == (char)Symbols.Cotangent)
+                {
+                    Result.Append("cot");
+                }
+
+                else if (Expression[Iter] == (char)Symbols.Logarithm)
+                {
+                    Result.Append("log");
+                }
+
+                else if (Expression[Iter] == (char)Symbols.NaturalLogarithm)
+                {
+                    Result.Append("ln");
+                }
+
+                else if (Expression[Iter] == (char)Symbols.Root)
+                {
+                    Result.Append("√");
+                }
+
                 else
                 {
                     Result.Append(Expression[Iter]);
