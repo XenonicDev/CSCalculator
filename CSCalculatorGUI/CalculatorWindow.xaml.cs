@@ -155,33 +155,33 @@ namespace CSCalculatorGUI
 
         private void Operation_Add_Click(object sender, RoutedEventArgs e)
         {
-            Builder.Add((char)Symbols.Add);
+            Builder.TryAddOffAnswer((char)Symbols.Add, MemoryHandler);
 
             UpdateExpression();
         }
 
         private void Operation_Subtract_Click(object sender, RoutedEventArgs e)
         {
-            Builder.Add((char)Symbols.Subtract);
+            Builder.TryAddOffAnswer((char)Symbols.Subtract, MemoryHandler);
 
             UpdateExpression();
         }
 
         private void Operation_Multiply_Click(object sender, RoutedEventArgs e)
         {
-            Builder.Add((char)Symbols.Multiply);
+            Builder.TryAddOffAnswer((char)Symbols.Multiply, MemoryHandler);
 
             UpdateExpression();
         }
 
         private void Operation_Divide_Click(object sender, RoutedEventArgs e)
         {
-            Builder.Add((char)Symbols.Divide);
+            Builder.TryAddOffAnswer((char)Symbols.Divide, MemoryHandler);
 
             UpdateExpression();
         }
 
-        private void Numpad_Exponent_Click(object sender, RoutedEventArgs e)
+        private void Numpad_Exponential_Click(object sender, RoutedEventArgs e)
         {
             Builder.Add((char)Symbols.Exponential);
 
@@ -237,14 +237,14 @@ namespace CSCalculatorGUI
 
         private void Operation_Caret_Click(object sender, RoutedEventArgs e)
         {
-            Builder.Add((char)Symbols.Caret);
+            Builder.TryAddOffAnswer((char)Symbols.Caret, MemoryHandler);
 
             UpdateExpression();
         }
 
         private void Operation_Square_Click(object sender, RoutedEventArgs e)
         {
-            Builder.Add((char)Symbols.Caret);
+            Builder.TryAddOffAnswer((char)Symbols.Caret, MemoryHandler);
             Builder.Add('2');
 
             UpdateExpression();
@@ -252,7 +252,7 @@ namespace CSCalculatorGUI
 
         private void Operation_Cube_Click(object sender, RoutedEventArgs e)
         {
-            Builder.Add((char)Symbols.Caret);
+            Builder.TryAddOffAnswer((char)Symbols.Caret, MemoryHandler);
             Builder.Add('3');
 
             UpdateExpression();

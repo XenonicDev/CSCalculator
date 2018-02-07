@@ -45,7 +45,7 @@
             <Button x:Name="Numpad_9" Content="9" Grid.Column="2" Click="Numpad_9_Click" FontSize="25" Grid.Row="1"/>
             <Button x:Name="Numpad_6" Content="6" Grid.Column="2" Grid.Row="2" Click="Numpad_6_Click" FontSize="25"/>
             <Button x:Name="Numpad_3" Content="3" Grid.Column="2" Grid.Row="3" Click="Numpad_3_Click" FontSize="25"/>
-            <Button x:Name="Numpad_Exponent" Content="EXP" Grid.Column="2" Grid.Row="4" Click="Numpad_Exponent_Click" FontSize="20"/>
+            <Button x:Name="Numpad_Exponential" Content="EXP" Grid.Column="2" Grid.Row="4" Click="Numpad_Exponential_Click" FontSize="20"/>
             <Button x:Name="Command_Delete" Content="DEL" Grid.Column="3" FontSize="20" FontWeight="Bold" Click="Command_Delete_Click" Grid.Row="1"/>
             <Button x:Name="Operation_Multiply" Content="×" Grid.Column="3" Grid.Row="2" FontSize="35" Click="Operation_Multiply_Click"/>
             <Button x:Name="Operation_Add" Content="+" Grid.Column="3" Grid.Row="3" FontSize="35" Click="Operation_Add_Click"/>

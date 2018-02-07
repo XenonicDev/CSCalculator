@@ -18,6 +18,20 @@ namespace CSCalculator.Core
             ExpBuilder.Append(Value);
         }
 
+        public void TryAddOffAnswer(char Value, Memory MemoryHandler)
+        {
+            if (MemoryHandler.HasHistory())
+            {
+                CExpression PrevExpression = new CExpression();
+
+                MemoryHandler.Grab(0, ref PrevExpression);
+
+                ExpBuilder.Append(PrevExpression.Result);
+            }
+
+            ExpBuilder.Append(Value);
+        }
+
         public void RemoveAt(int Index)
         {
             ExpBuilder.Remove(Index, 1);

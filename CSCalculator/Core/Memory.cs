@@ -36,6 +36,11 @@ namespace CSCalculator.Core
             Result = (CExpression)History[History.Count - IndexFromNewest - 1];
         }
 
+        public bool HasHistory()
+        {
+            return (History.Count != 0);
+        }
+
         public void Clear()
         {
             History.Clear();
