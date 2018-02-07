@@ -236,7 +236,7 @@ namespace CSCalculator.Core
                 case (char)Symbols.NaturalLogarithm:
                     return Math.Log(RHS);
                 case (char)Symbols.Root:
-                    return Math.Pow(LHS, 1d / RHS);
+                    return Math.Pow(RHS, 1d / LHS);
                 default:
                     throw new Exception("Unknown Operation");
             }
@@ -329,6 +329,31 @@ namespace CSCalculator.Core
                 for (int Iter = 0; Iter < Expression.Length; ++Iter)
                 {
                     if (Expression[Iter] == (char)Symbols.Caret)
+                    {
+                        FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
+
+                        StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, LowerIndex));
+
+                        ResultExpression.Append(SolveOperation(Expression[Iter], LHS, RHS).ToString());
+
+                        // Only Add Rest of Expression if There's Something to Add.
+                        if (UpperIndex != Expression.Length - 1)
+                        {
+                            ResultExpression.Append(Expression.Substring(UpperIndex + 1, Expression.Length - UpperIndex - 1));
+                        }
+
+                        // Replace Original Expression.
+                        Expression = ResultExpression.ToString();
+
+                        // Reset Iterator, Research the Expression.
+                        Iter = 0;
+                    }
+                }
+
+                // Search Roots.
+                for (int Iter = 0; Iter < Expression.Length; ++Iter)
+                {
+                    if (Expression[Iter] == (char)Symbols.Root)
                     {
                         FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
 
