@@ -247,6 +247,12 @@ namespace CSCalculator.Core
                 {
                     if (Expression[Iter] == (char)Symbols.Add || (Expression[Iter] == (char)Symbols.Subtract && Iter != 0))
                     {
+                        // Check Case: xE+y
+                        if (Expression[Iter - 1] == 'E')
+                        {
+                            continue;
+                        }
+
                         FindLHSAndRHS(Expression, Iter, out LowerIndex, out UpperIndex, out LHS, out RHS);
 
                         StringBuilder ResultExpression = new StringBuilder(Expression.Substring(0, LowerIndex));
