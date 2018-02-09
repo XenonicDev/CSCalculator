@@ -61,6 +61,24 @@ namespace CSCalculator.Core
                         ++Iter;  // Double Increment to Avoid Rechecking.
                     }
                 }
+
+                // Case: xfuncy -> x*funcy
+                if (ExpBuilder[Iter] == (char)Symbols.Sine ||
+                    ExpBuilder[Iter] == (char)Symbols.Cosine ||
+                    ExpBuilder[Iter] == (char)Symbols.Tangent ||
+                    ExpBuilder[Iter] == (char)Symbols.Cosecant ||
+                    ExpBuilder[Iter] == (char)Symbols.Secant ||
+                    ExpBuilder[Iter] == (char)Symbols.Cotangent ||
+                    ExpBuilder[Iter] == (char)Symbols.Logarithm ||
+                    ExpBuilder[Iter] == (char)Symbols.NaturalLogarithm)
+                {
+                    if (Iter != 0 && (ExpBuilder[Iter - 1] == ' ' || ((int)ExpBuilder[Iter - 1] >= 48 && (int)ExpBuilder[Iter - 1] <= 57)))
+                    {
+                        ExpBuilder = ExpBuilder.Insert(Iter, (char)Symbols.Multiply);
+
+                        ++Iter;  // Double Increment to Avoid Rechecking.
+                    }
+                }
             }
         }
 

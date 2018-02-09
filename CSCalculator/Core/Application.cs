@@ -87,44 +87,18 @@ namespace CSCalculator.Core
                 --LHSOffset;
             }
 
-            if (Expression[LHSOffset] == (char)Symbols.Sine)
+            if (Expression[LHSOffset] == (char)Symbols.Sine ||
+                Expression[LHSOffset] == (char)Symbols.Cosine ||
+                Expression[LHSOffset] == (char)Symbols.Tangent ||
+                Expression[LHSOffset] == (char)Symbols.Cosecant ||
+                Expression[LHSOffset] == (char)Symbols.Secant ||
+                Expression[LHSOffset] == (char)Symbols.Cotangent ||
+                Expression[LHSOffset] == (char)Symbols.Logarithm ||
+                Expression[LHSOffset] == (char)Symbols.NaturalLogarithm)
             {
                 LHS = 0d;
-            }
 
-            else if (Expression[LHSOffset] == (char)Symbols.Cosine)
-            {
-                LHS = 0d;
-            }
-
-            else if (Expression[LHSOffset] == (char)Symbols.Tangent)
-            {
-                LHS = 0d;
-            }
-
-            else if (Expression[LHSOffset] == (char)Symbols.Cosecant)
-            {
-                LHS = 0d;
-            }
-
-            else if (Expression[LHSOffset] == (char)Symbols.Secant)
-            {
-                LHS = 0d;
-            }
-
-            else if (Expression[LHSOffset] == (char)Symbols.Cotangent)
-            {
-                LHS = 0d;
-            }
-
-            else if (Expression[LHSOffset] == (char)Symbols.Logarithm)
-            {
-                LHS = 0d;
-            }
-
-            else if (Expression[LHSOffset] == (char)Symbols.NaturalLogarithm)
-            {
-                LHS = 0d;
+                LowerIndex = TokenIndex;
             }
 
             else
@@ -263,42 +237,14 @@ namespace CSCalculator.Core
                 {
                     bool FoundFunc = false;
 
-                    if (Expression[Iter] == (char)Symbols.Sine)
-                    {
-                        FoundFunc = true;
-                    }
-
-                    else if (Expression[Iter] == (char)Symbols.Cosine)
-                    {
-                        FoundFunc = true;
-                    }
-
-                    else if (Expression[Iter] == (char)Symbols.Tangent)
-                    {
-                        FoundFunc = true;
-                    }
-
-                    else if (Expression[Iter] == (char)Symbols.Cosecant)
-                    {
-                        FoundFunc = true;
-                    }
-
-                    else if (Expression[Iter] == (char)Symbols.Secant)
-                    {
-                        FoundFunc = true;
-                    }
-
-                    else if (Expression[Iter] == (char)Symbols.Cotangent)
-                    {
-                        FoundFunc = true;
-                    }
-
-                    else if (Expression[Iter] == (char)Symbols.Logarithm)
-                    {
-                        FoundFunc = true;
-                    }
-
-                    else if (Expression[Iter] == (char)Symbols.NaturalLogarithm)
+                    if (Expression[Iter] == (char)Symbols.Sine ||
+                        Expression[Iter] == (char)Symbols.Cosine ||
+                        Expression[Iter] == (char)Symbols.Tangent ||
+                        Expression[Iter] == (char)Symbols.Cosecant ||
+                        Expression[Iter] == (char)Symbols.Secant ||
+                        Expression[Iter] == (char)Symbols.Cotangent ||
+                        Expression[Iter] == (char)Symbols.Logarithm ||
+                        Expression[Iter] == (char)Symbols.NaturalLogarithm)
                     {
                         FoundFunc = true;
                     }
